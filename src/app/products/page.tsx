@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ProductCard } from "@/components/product-card";
-import { products } from "@/lib/products";
+import { categories, getPublicProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Products",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default function ProductsPage() {
-  const categories = Array.from(new Set(products.map((product) => product.category)));
+  const products = getPublicProducts();
 
   return (
     <section className="section">

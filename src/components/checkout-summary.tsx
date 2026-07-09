@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CreditCard, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/components/cart-provider";
-import { formatPrice, products } from "@/lib/products";
+import { formatPrice, getProductById } from "@/lib/products";
 
 export function CheckoutSummary() {
   const { lines, total, removeItem, clearCart } = useCart();
@@ -39,7 +39,7 @@ export function CheckoutSummary() {
   return (
     <div className="card" style={{ padding: 24, display: "grid", gap: 16 }}>
       {lines.map((line) => {
-        const product = products.find((item) => item.id === line.id);
+      const product = getProductById(line.id);
         if (!product) return null;
         return (
           <div key={line.id} style={{ display: "flex", justifyContent: "space-between", gap: 14 }}>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site } from "@/lib/content";
+import { getPolicy } from "@/lib/policies";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -7,25 +7,19 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPolicyPage() {
+  const policy = getPolicy("privacy-policy");
+
   return (
     <section className="section">
       <div className="container" style={{ maxWidth: 860 }}>
         <span className="eyebrow">Privacy</span>
-        <h1>Privacy Policy</h1>
-        <p className="lead">
-          Safna Products collects only the information needed to respond to enquiries, process orders once checkout is
-          connected, improve the website, and support customer service.
-        </p>
-        <h2>Information collected</h2>
-        <p>Contact form details, order details, customer account details, analytics events, and communication preferences.</p>
-        <h2>How information is used</h2>
-        <p>To answer enquiries, fulfil orders, manage customer support, improve products, and measure website performance.</p>
-        <h2>Third-party services</h2>
-        <p>Payment, analytics, email, hosting, and ecommerce services will be confirmed before launch.</p>
-        <h2>Contact</h2>
-        <p>
-          For privacy questions, email <a href={`mailto:${site.email}`}>{site.email}</a>.
-        </p>
+        <h1>{policy?.title}</h1>
+        <p className="lead">{policy?.summary}</p>
+        {policy?.body.map((paragraph) => (
+          <p key={paragraph} style={{ color: "#526158", lineHeight: 1.75 }}>
+            {paragraph}
+          </p>
+        ))}
       </div>
     </section>
   );

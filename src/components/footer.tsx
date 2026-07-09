@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { navItems, site } from "@/lib/content";
+import { policies } from "@/lib/policies";
 
 export function Footer() {
   const whatsappHref = site.whatsappNumber
@@ -14,7 +15,7 @@ export function Footer() {
           <div>
             <strong style={{ fontSize: "1.5rem" }}>Safna Products</strong>
             <p style={{ color: "#dce5dd", lineHeight: 1.7 }}>
-              Bright, simple ecommerce for fresh produce, bundles, and food-led product marketing.
+              Bright, simple ecommerce for sauces, seasonings, bundles, pantry products, and food-led marketing.
             </p>
           </div>
           <div>
@@ -28,11 +29,13 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <strong>Contact</strong>
+            <strong>Policies</strong>
             <div style={{ display: "grid", gap: 10, marginTop: 14 }}>
-              <a href={`mailto:${site.email}`}>{site.email}</a>
-              <Link href="/privacy-policy">Privacy Policy</Link>
-              <Link href="/admin">Admin</Link>
+              {policies.slice(0, 4).map((policy) => (
+                <Link key={policy.slug} href={policy.slug === "privacy-policy" ? "/privacy-policy" : `/policies/${policy.slug}`}>
+                  {policy.title}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

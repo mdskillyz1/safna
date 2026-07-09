@@ -3,10 +3,10 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
 import { audienceCards, featureCards, reviews, trustStats } from "@/lib/content";
-import { products } from "@/lib/products";
+import { getPublicProducts } from "@/lib/products";
 
 export default function Home() {
-  const featured = products.filter((product) => product.featured);
+  const featured = getPublicProducts().filter((product) => product.featured);
 
   return (
     <>

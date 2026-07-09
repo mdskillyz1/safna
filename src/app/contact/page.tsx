@@ -19,6 +19,9 @@ export default function ContactPage() {
             details.
           </p>
           <p>
+            For live launch, this form can route into the admin enquiries screen and send email notifications to Safna.
+          </p>
+          <p>
             Email: <a href={`mailto:${site.email}`}>{site.email}</a>
           </p>
         </div>

@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { ShoppingBasket } from "lucide-react";
-import { Product, formatPrice } from "@/lib/products";
+import { Product, formatPrice, getStockLabel } from "@/lib/products";
 import { useCart } from "./cart-provider";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -19,7 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
         <h3 style={{ margin: 0, fontSize: "1.35rem" }}>{product.name}</h3>
         <p style={{ margin: 0, color: "#526158", lineHeight: 1.55 }}>{product.description}</p>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4 }}>
-          {[product.size, product.heatLevel, product.dietary].map((item) => (
+          {[product.size, product.heatLevel, product.dietary, getStockLabel(product.stock)].map((item) => (
             <span
               key={item}
               style={{
@@ -38,11 +39,21 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14 }}>
-        <strong style={{ fontSize: "1.2rem" }}>{formatPrice(product.price)}</strong>
-        <button className="button yellow" type="button" onClick={() => addItem(product)}>
+        <div>
+          {product.salePrice ? (
+            <span style={{ display: "block", color: "#6b756e", textDecoration: "line-through", fontWeight: 800 }}>
+              {formatPrice(product.price)}
+            </span>
+          ) : null}
+          <strong style={{ fontSize: "1.2rem" }}>{formatPrice(product.salePrice || product.price)}</strong>
+        </div>
+        <button className="button yellow" type="button" onClick={() => addItem(product)} disabled={product.stock <= 0}>
           <ShoppingBasket size={18} /> Add
         </button>
       </div>
+      <Link className="button secondary" href={`/products/${product.slug}`}>
+        View details
+      </Link>
     </article>
   );
 }

@@ -13,6 +13,10 @@ export default function FAQPage() {
         <div className="page-title">
           <span className="eyebrow">FAQ</span>
           <h1>Helpful answers before customers order.</h1>
+          <p>
+            Safna is being prepared for UK ecommerce with Stripe checkout, UK delivery settings, food product information,
+            customer accounts, and editable policies.
+          </p>
         </div>
         <div style={{ display: "grid", gap: 14, marginTop: 28 }}>
           {faqs.map((faq) => (
