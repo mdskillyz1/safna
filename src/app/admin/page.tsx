@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   description: "Safna Products admin dashboard readiness page for products, orders, customers, blog, and reviews.",
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default function AdminPage() {
   return <AdminDashboard />;
 }
