@@ -15,7 +15,7 @@ export default function AdminPage() {
           <h1>A dashboard structure for the final ecommerce workflow.</h1>
           <p>
             Once the platform is confirmed, this area can be protected and connected to real products, orders, reviews,
-            enquiries, blog posts, analytics, and customer data.
+            enquiries, blog posts, analytics, ingredients, allergens, stock, and customer data.
           </p>
         </div>
         <div className="grid-3" style={{ marginTop: 28 }}>

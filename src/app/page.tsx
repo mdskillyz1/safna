@@ -14,12 +14,12 @@ export default function Home() {
         <div className="container grid-2" style={{ alignItems: "center" }}>
           <div>
             <span className="eyebrow">
-              <Sparkles size={16} /> Bright fresh produce
+              <Sparkles size={16} /> Sauces, seasonings, flavour
             </span>
-            <h1>Fresh Safna products, made easy to browse and buy.</h1>
+            <h1>Safna food products, made easy to browse and buy.</h1>
             <p>
-              A modern ecommerce storefront for produce, bundles, reviews, blog content, customer accounts, and a
-              payment-ready checkout path.
+              A modern ecommerce storefront for Safna sauces, seasonings, pantry products, bundles, reviews, blog
+              content, customer accounts, and a payment-ready checkout path.
             </p>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 28 }}>
               <Link className="button yellow" href="/products">
@@ -49,8 +49,12 @@ export default function Home() {
         <div className="container">
           <div className="page-title">
             <span className="eyebrow">Featured products</span>
-            <h2 style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)", margin: "18px 0 12px" }}>Launch-ready product cards</h2>
-            <p className="lead">Edit product names, prices, categories, and descriptions in one simple data file.</p>
+            <h2 style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)", margin: "18px 0 12px" }}>
+              Sauces and seasonings ready to sell
+            </h2>
+            <p className="lead">
+              Product cards now support price, size, heat level, dietary notes, categories, and bundle messaging.
+            </p>
           </div>
           <div className="grid-3" style={{ marginTop: 28 }}>
             {featured.map((product) => (
@@ -68,8 +72,8 @@ export default function Home() {
               Ecommerce features without a heavy, cluttered feel.
             </h2>
             <p className="lead">
-              Safna gets a simple customer journey now, with clear upgrade points for payments, accounts, stock, tax,
-              shipping, and admin workflows once Ibrahim confirms the platform.
+              Safna gets a simple customer journey now, with clear upgrade points for payments, accounts, stock, allergens,
+              shipping, tax, and admin workflows once Ibrahim confirms the final details.
             </p>
           </div>
           <div className="grid-2">

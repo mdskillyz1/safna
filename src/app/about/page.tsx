@@ -12,14 +12,14 @@ export default function AboutPage() {
       <div className="container grid-2" style={{ alignItems: "center" }}>
         <div className="page-title">
           <span className="eyebrow">About Safna</span>
-          <h1>A clean product brand for everyday fresh food.</h1>
+          <h1>A bright food brand for everyday flavour.</h1>
           <p>
             Safna Products is being prepared as a modern ecommerce experience for customers who want to browse, compare,
-            and buy fresh produce and product bundles online.
+            and buy sauces, seasonings, bundles, and future food product ranges online.
           </p>
           <p>
-            The site keeps the brand bright and approachable while leaving room for real product photography, customer
-            account features, payment integration, fulfilment rules, and admin operations.
+            The site keeps the brand bright and approachable while leaving room for real product photography, ingredients,
+            allergen information, customer accounts, payment integration, fulfilment rules, and admin operations.
           </p>
         </div>
         <Image

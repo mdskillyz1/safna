@@ -15,7 +15,7 @@ export default function CheckoutPage() {
           <h1>Review your Safna order.</h1>
           <p>
             The basket works locally today. Real card payments, delivery rates, tax, stock checks, and confirmation emails
-            need the selected payment or ecommerce provider.
+            need the selected payment or ecommerce provider before Safna accepts live food-product orders.
           </p>
         </div>
         <CheckoutSummary />

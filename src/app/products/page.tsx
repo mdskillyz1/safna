@@ -4,7 +4,7 @@ import { products } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "Browse Safna Products fresh produce, bundles, pantry items, and launch product listings.",
+  description: "Browse Safna Products sauces, seasonings, bundles, pantry items, and launch product listings.",
 };
 
 export default function ProductsPage() {
@@ -15,10 +15,10 @@ export default function ProductsPage() {
       <div className="container">
         <div className="page-title">
           <span className="eyebrow">Shop Safna</span>
-          <h1>Products for fresh, colourful cooking.</h1>
+          <h1>Sauces, seasonings, bundles, and pantry products.</h1>
           <p>
-            Browse launch products below. Product photos, stock levels, delivery rules, VAT, and discount codes can be
-            connected when the ecommerce platform is confirmed.
+            Browse the launch product structure below. Final photos, ingredients, allergens, stock levels, delivery rules,
+            VAT, and discount codes can be connected when the ecommerce platform is confirmed.
           </p>
         </div>
         {categories.map((category) => (

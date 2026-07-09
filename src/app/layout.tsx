@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     template: "%s | Safna Products",
   },
   description:
-    "Safna Products is a bright, simple ecommerce website for browsing and buying fresh produce, bundles, and pantry essentials online.",
-  keywords: ["Safna", "Safna Products", "fresh produce", "online shop", "ecommerce"],
+    "Safna Products is a bright, simple ecommerce website for browsing and buying sauces, seasonings, bundles, and pantry essentials online.",
+  keywords: ["Safna", "Safna Products", "sauces", "seasonings", "food products", "online shop", "ecommerce"],
   openGraph: {
     title: "Safna Products",
-    description: "Fresh produce and product bundles, ready for online ordering.",
+    description: "Sauces, seasonings, pantry products, and bundles ready for online ordering.",
     url: site.url,
     siteName: "Safna Products",
     images: [{ url: "/safna-logo.jpg", width: 1320, height: 1506 }],
