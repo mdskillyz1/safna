@@ -30,7 +30,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch {
       return [];
     }
-  }, []);
+  });
 
   useEffect(() => {
     window.localStorage.setItem("safna-cart", JSON.stringify(lines));
