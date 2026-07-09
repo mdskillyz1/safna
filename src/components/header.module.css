@@ -2,16 +2,29 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1px solid rgba(16, 23, 19, 0.1);
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(16, 23, 19, 0.12);
+  background: #fff;
+}
+
+.announcement {
+  display: flex;
+  min-height: 39px;
+  align-items: center;
+  justify-content: center;
+  background: #101713;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 82px;
+  min-height: 94px;
   gap: 20px;
 }
 
@@ -19,15 +32,14 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.2rem;
-  font-weight: 1000;
 }
 
 .brand img {
-  width: 46px;
-  height: 52px;
-  border-radius: 8px;
+  width: 64px;
+  height: 72px;
+  border-radius: 6px;
   object-fit: cover;
+  border: 2px solid #ffdc3d;
 }
 
 .desktop,
@@ -38,15 +50,14 @@
 }
 
 .desktop a {
-  border-radius: 999px;
-  padding: 10px 12px;
-  color: #36453c;
-  font-weight: 800;
-  font-size: 0.94rem;
+  padding: 10px 14px;
+  color: #101713;
+  font-weight: 950;
+  font-size: 0.98rem;
 }
 
 .desktop a:hover {
-  background: #fff2a6;
+  background: #ffdc3d;
   color: #101713;
 }
 
@@ -59,7 +70,7 @@
   min-width: 44px;
   height: 44px;
   border: 1px solid rgba(16, 23, 19, 0.14);
-  border-radius: 999px;
+  border-radius: 8px;
   background: #fff;
   color: #101713;
 }

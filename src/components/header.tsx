@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, ShoppingBag, UserRound, X } from "lucide-react";
+import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
 import { useState } from "react";
 import { navItems } from "@/lib/content";
 import { useCart } from "./cart-provider";
@@ -14,10 +14,12 @@ export function Header() {
 
   return (
     <header className={styles.header}>
+      <Link href="/products" className={styles.announcement}>
+        Launch range coming soon - shop sauces, seasonings and bundles
+      </Link>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.brand} aria-label="Safna home">
-          <Image src="/safna-logo.jpg" alt="Safna Products logo" width={58} height={66} priority />
-          <span>Safna</span>
+          <Image src="/safna-logo.jpg" alt="Safna Products logo" width={78} height={88} priority />
         </Link>
 
         <nav className={styles.desktop} aria-label="Main navigation">
@@ -29,6 +31,9 @@ export function Header() {
         </nav>
 
         <div className={styles.actions}>
+          <Link href="/products" className={styles.iconButton} aria-label="Search products">
+            <Search size={20} />
+          </Link>
           <Link href="/account" className={styles.iconButton} aria-label="Customer account">
             <UserRound size={20} />
           </Link>

@@ -15,16 +15,15 @@ export default function ProductsPage() {
       <div className="container">
         <div className="page-title">
           <span className="eyebrow">Shop Safna</span>
-          <h1>Sauces, seasonings, bundles, and pantry products.</h1>
+          <h1>Sauces, seasonings, bundles and pantry products.</h1>
           <p>
-            Browse the launch product structure below. Final photos, ingredients, allergens, stock levels, delivery rules,
-            VAT, and discount codes can be connected when the ecommerce platform is confirmed.
+            Pick a sauce for the table, a seasoning for the pan, or a bundle that fills the shelf in one go.
           </p>
         </div>
         {categories.map((category) => (
           <div key={category} style={{ marginTop: 44 }}>
-            <h2>{category}</h2>
-            <div className="grid-3">
+            <h2 style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)", marginBottom: 18 }}>{category}</h2>
+            <div className="grid-3 product-grid">
               {products
                 .filter((product) => product.category === category)
                 .map((product) => (

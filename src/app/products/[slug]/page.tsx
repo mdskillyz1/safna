@@ -51,13 +51,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <>
       <section className="section">
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div className="card" style={{ padding: 24 }}>
-            <div className="product-blob" style={{ "--blob-colour": product.colour } as React.CSSProperties}>
-              {product.name.charAt(0)}
+          <div className="product-card" style={{ padding: 18 }}>
+            <div className="product-packshot" style={{ "--pack-colour": product.colour } as React.CSSProperties}>
+              <span>{product.category}</span>
+              <strong>{product.name.split(" ")[0]}</strong>
             </div>
             <p style={{ color: "#526158", lineHeight: 1.7 }}>
-              Temporary product image placeholder. Replace this with final bottle, pouch, label, packaging, or gift-box
-              photography from the admin product media area.
+              Product photography and final packaging imagery will appear here as the Safna range is completed.
             </p>
           </div>
 

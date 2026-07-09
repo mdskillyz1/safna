@@ -1,20 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingBasket } from "lucide-react";
+import { ArrowRight, ShoppingBasket } from "lucide-react";
 import { Product, formatPrice, getStockLabel } from "@/lib/products";
 import { useCart } from "./cart-provider";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, compact = false }: { product: Product; compact?: boolean }) {
   const { addItem } = useCart();
 
   return (
-    <article className="card" style={{ display: "grid", gap: 18, padding: 18 }}>
-      <div className="product-blob" style={{ "--blob-colour": product.colour } as React.CSSProperties}>
-        {product.name.charAt(0)}
+    <article className={`product-card${compact ? " compact" : ""}`}>
+      <div className="product-packshot" style={{ "--pack-colour": product.colour } as React.CSSProperties}>
+        <span>{product.category}</span>
+        <strong>{product.name.split(" ")[0]}</strong>
       </div>
       <div style={{ display: "grid", gap: 8 }}>
-        <span className="eyebrow" style={{ padding: "6px 10px", fontSize: ".72rem" }}>
+        <span className="product-badge">
           {product.badge}
         </span>
         <h3 style={{ margin: 0, fontSize: "1.35rem" }}>{product.name}</h3>
@@ -51,8 +52,8 @@ export function ProductCard({ product }: { product: Product }) {
           <ShoppingBasket size={18} /> Add
         </button>
       </div>
-      <Link className="button secondary" href={`/products/${product.slug}`}>
-        View details
+      <Link className="product-link" href={`/products/${product.slug}`}>
+        View details <ArrowRight size={16} />
       </Link>
     </article>
   );
