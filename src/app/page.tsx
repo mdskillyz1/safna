@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bell, ImagePlus, Mail, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Bell, BookOpen, Gift, ImagePlus, Mail, Search, ShieldCheck, Sparkles } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
-import { blogPosts, reviews, site } from "@/lib/content";
+import { PromoPopup } from "@/components/promo-popup";
+import { blogPosts, promoCampaigns, reviews, site, storefrontTiles } from "@/lib/content";
 import { categories, getPublicProducts } from "@/lib/products";
 
 export default function Home() {
@@ -11,9 +12,11 @@ export default function Home() {
   const activeCategories = categories.filter((category) => products.some((product) => product.category === category));
   const publishedPosts = blogPosts.filter((post) => post.status === "Published");
   const hasProducts = products.length > 0;
+  const activePromo = promoCampaigns.find((promo) => promo.status === "Published");
 
   return (
     <>
+      <PromoPopup />
       <section className="shop-hero launch-hero">
         <div className="hero-photo" aria-hidden="true">
           <div className="plate plate-one" />
@@ -44,6 +47,33 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="storefront-rail" aria-label="Main shopping routes">
+        <div className="container storefront-rail-inner">
+          {storefrontTiles.map((tile, index) => (
+            <Link href={tile.href} key={tile.label}>
+              {index === 0 ? <Gift size={22} /> : index === 1 ? <Search size={22} /> : <BookOpen size={22} />}
+              <span>{tile.label}</span>
+              <small>{tile.description}</small>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {activePromo ? (
+        <section className="promo-band">
+          <div className="container promo-band-inner">
+            <div>
+              <span className="eyebrow">Promotion builder</span>
+              <h2>{activePromo.title}</h2>
+              <p>{activePromo.body}</p>
+            </div>
+            <Link className="button dark" href={`mailto:${site.email}?subject=Safna%20launch%20list`}>
+              Join now <ArrowRight size={18} />
+            </Link>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section split-intro">
         <div className="container grid-2" style={{ alignItems: "center" }}>
@@ -134,6 +164,30 @@ export default function Home() {
             Homepage sections for recipes, customer reviews, bundles and product education are prepared, but hidden until
             approved content exists in the backend.
           </p>
+        </div>
+      </section>
+
+      <section className="section customer-journey-section">
+        <div className="container">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">Customer journey</span>
+              <h2 className="display-title">Browse, learn, add to bag, then checkout.</h2>
+            </div>
+          </div>
+          <div className="journey-grid">
+            {[
+              ["Search products", "The header search expands into a product finder and hides unapproved catalogue data."],
+              ["Build a basket", "The bag drawer opens from any page and blocks stale or unpublished items from checkout."],
+              ["Create an account", "Account screens are ready for login, saved addresses, repeat orders and preferences."],
+              ["Preview first", "Admin edits can be reviewed before the content is pushed live to customers."],
+            ].map(([title, body]) => (
+              <article key={title}>
+                <strong>{title}</strong>
+                <p>{body}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

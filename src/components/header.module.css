@@ -49,11 +49,20 @@
   gap: 8px;
 }
 
+.shopNav {
+  margin-right: auto;
+}
+
+.storyNav {
+  margin-left: auto;
+}
+
 .desktop a {
   padding: 10px 14px;
   color: #101713;
-  font-weight: 950;
+  font-weight: 850;
   font-size: 0.98rem;
+  white-space: nowrap;
 }
 
 .desktop a:hover {
@@ -73,6 +82,7 @@
   border-radius: 8px;
   background: #fff;
   color: #101713;
+  cursor: pointer;
 }
 
 .cartButton {
@@ -88,6 +98,65 @@
 
 .mobile {
   display: none;
+}
+
+.searchPanel {
+  border-top: 1px solid rgba(16, 23, 19, 0.1);
+  border-bottom: 1px solid rgba(16, 23, 19, 0.1);
+  background: #fffdf7;
+  box-shadow: 0 18px 42px rgba(16, 23, 19, 0.08);
+}
+
+.searchInner {
+  display: grid;
+  gap: 12px;
+  padding: 14px 0 16px;
+}
+
+.searchInner label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  border: 2px solid #101713;
+  border-radius: 999px;
+  padding: 0 18px;
+  background: #fff;
+}
+
+.searchInner input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #101713;
+  outline: 0;
+}
+
+.searchResults {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.searchResults a,
+.searchResults div {
+  display: grid;
+  gap: 5px;
+  border: 1px solid rgba(16, 23, 19, 0.12);
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+}
+
+.searchResults span {
+  color: #667268;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.searchResults strong {
+  font-size: 0.95rem;
 }
 
 @media (max-width: 900px) {
@@ -119,5 +188,9 @@
 
   .mobile a:hover {
     background: #fff2a6;
+  }
+
+  .searchResults {
+    grid-template-columns: 1fr;
   }
 }

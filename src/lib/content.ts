@@ -8,17 +8,57 @@ export const site = {
 };
 
 export const navItems = [
-  { href: "/products", label: "Products" },
-  { href: "/about", label: "About" },
-  { href: "/testimonials", label: "Reviews" },
+  { href: "/products?category=Bundles", label: "Safna Sets" },
+  { href: "/products", label: "Shop All" },
+  { href: "/blog", label: "Recipes" },
+  { href: "/about", label: "Our Story" },
   { href: "/blog", label: "Blog" },
-  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
+];
+
+export type PublishStatus = "Draft" | "Published";
+
+export const storefrontTiles = [
+  {
+    label: "Safna Sets",
+    href: "/products?category=Bundles",
+    description: "Bundles, gift boxes and future multi-product collections.",
+    status: "Published" as PublishStatus,
+  },
+  {
+    label: "Shop All",
+    href: "/products",
+    description: "The full public catalogue once products are approved.",
+    status: "Published" as PublishStatus,
+  },
+  {
+    label: "Recipes",
+    href: "/blog",
+    description: "Recipe ideas, serving inspiration and product education.",
+    status: "Published" as PublishStatus,
+  },
+];
+
+export const promoCampaigns = [
+  {
+    id: "launch-list",
+    title: "Join the Safna launch list",
+    body: "Be first to hear when the first product collection, delivery options and recipes go live.",
+    placement: "Homepage popup and launch sections",
+    status: "Published" as PublishStatus,
+  },
+  {
+    id: "recipe-book",
+    title: "Free recipe e-book",
+    body: "Prepared as a future campaign once Safna has approved recipe content and product photos.",
+    placement: "Recipe pages and checkout drawer",
+    status: "Draft" as PublishStatus,
+  },
 ];
 
 export const reviews: { name: string; quote: string; rating: number }[] = [];
 
-export const blogPosts: { slug: string; title: string; excerpt: string; date: string; status?: "Draft" | "Published" }[] = [];
+export const blogPosts: { slug: string; title: string; excerpt: string; date: string; status?: PublishStatus }[] = [];
 
 export const faqs = [
   {

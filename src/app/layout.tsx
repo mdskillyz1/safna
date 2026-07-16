@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AnalyticsScripts } from "@/components/analytics-scripts";
+import { CartDrawer } from "@/components/cart-drawer";
 import { CartProvider } from "@/components/cart-provider";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -38,6 +39,7 @@ export default function RootLayout({
           <Header />
           <main>{children}</main>
           <Footer />
+          <CartDrawer />
         </CartProvider>
       </body>
     </html>

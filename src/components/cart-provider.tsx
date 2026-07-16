@@ -15,11 +15,15 @@ type CartContextValue = {
   addItem: (product: Product) => void;
   removeItem: (id: string) => void;
   clearCart: () => void;
+  bagOpen: boolean;
+  openBag: () => void;
+  closeBag: () => void;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
+  const [bagOpen, setBagOpen] = useState(false);
   const [lines, setLines] = useState<CartLine[]>(() => {
     if (typeof window === "undefined") {
       return [];
@@ -58,6 +62,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           }
           return [...current, { id: product.id, quantity: 1 }];
         });
+        setBagOpen(true);
       },
       removeItem(id) {
         setLines((current) => current.filter((line) => line.id !== id));
@@ -65,8 +70,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       clearCart() {
         setLines([]);
       },
+      bagOpen,
+      openBag() {
+        setBagOpen(true);
+      },
+      closeBag() {
+        setBagOpen(false);
+      },
     };
-  }, [lines]);
+  }, [bagOpen, lines]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

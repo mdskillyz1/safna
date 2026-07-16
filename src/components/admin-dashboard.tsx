@@ -43,6 +43,7 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
+import { promoCampaigns, storefrontTiles } from "@/lib/content";
 import { policies } from "@/lib/policies";
 import { categories, formatPrice, getStockLabel, products, type Product } from "@/lib/products";
 import { customers, deliverySettings, enquiries, homepageSections, orders, reviewsAdmin } from "@/lib/store-data";
@@ -184,6 +185,7 @@ export function AdminDashboard() {
       status: "Draft",
       visibility: "Hidden",
       featured: false,
+      demoOnly: false,
       badge: "Draft",
       description: "Short product description.",
       longDescription: "Long product story and usage notes.",
@@ -613,9 +615,16 @@ function ProductsView({
                       <button type="button" title="Quick edit" onClick={() => setSelectedProductId(product.id)}>
                         <Edit3 size={15} />
                       </button>
-                      <Link title="Preview product page" href={`/products/${product.slug}`} target="_blank">
+                      <button
+                        type="button"
+                        title="Preview product page"
+                        onClick={() => {
+                          setSelectedProductId(product.id);
+                          notify("Admin preview updated below");
+                        }}
+                      >
                         <Eye size={15} />
-                      </Link>
+                      </button>
                       <button type="button" title="Duplicate" onClick={() => duplicateProduct(product)}>
                         <Copy size={15} />
                       </button>
@@ -717,6 +726,7 @@ function ProductEditor({
           </div>
           <SwitchControl label="Featured product" checked={Boolean(product.featured)} onChange={(checked) => updateProduct("featured", checked)} />
           <SwitchControl label="Bundle or gift box" checked={Boolean(product.isBundle)} onChange={(checked) => updateProduct("isBundle", checked)} />
+          <SwitchControl label="Internal demo only" checked={Boolean(product.demoOnly)} onChange={(checked) => updateProduct("demoOnly", checked)} />
         </EditorSection>
 
         <EditorSection title="Related products">
@@ -732,6 +742,18 @@ function ProductEditor({
       </div>
 
       <aside className="admin-card side-panel">
+        <h2>Live preview</h2>
+        <div className="admin-product-preview">
+          <div className="preview-packshot" style={{ "--thumb": product.colour } as CSSProperties}>
+            {product.name.charAt(0)}
+          </div>
+          <span>{product.category}</span>
+          <strong>{product.name}</strong>
+          <p>{product.description}</p>
+          <small>
+            Public when: Published + Public visibility + not internal demo only.
+          </small>
+        </div>
         <h2>Automation</h2>
         <Completeness product={product} large />
         <div className="automation-list">
@@ -962,6 +984,44 @@ function ContentView({ notify }: { notify: (message: string, kind?: ToastKind) =
   return (
     <>
       <AdminHeader eyebrow="Content" title="Homepage, blog and FAQ CMS" body="Draft, preview and publish content with SEO fields and last-edited context." />
+      <div className="admin-card cms-preview-card">
+        <div className="admin-card-head">
+          <div>
+            <h2>Storefront preview workflow</h2>
+            <p>Update homepage routes, promotional placements and launch content before pushing anything live.</p>
+          </div>
+          <StatusBadge tone="success">Preview mode</StatusBadge>
+        </div>
+        <div className="cms-preview-layout">
+          <div className="cms-nav-builder">
+            <h3>Homepage columns</h3>
+            {storefrontTiles.map((tile) => (
+              <button type="button" key={tile.label} onClick={() => notify(`${tile.label} preview selected`)}>
+                <strong>{tile.label}</strong>
+                <span>{tile.description}</span>
+              </button>
+            ))}
+          </div>
+          <div className="cms-promo-builder">
+            <h3>Promotion placements</h3>
+            {promoCampaigns.map((campaign) => (
+              <article key={campaign.id}>
+                <span>{campaign.status}</span>
+                <strong>{campaign.title}</strong>
+                <p>{campaign.placement}</p>
+                <div className="row-actions text-actions">
+                  <button type="button" onClick={() => notify(`${campaign.title} draft saved`)}>
+                    <Save size={15} /> Save draft
+                  </button>
+                  <button type="button" onClick={() => notify(`${campaign.title} preview opened`)}>
+                    <Eye size={15} /> Preview
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
       <div className="admin-two-col">
         {[...homepageSections, { section: "FAQs", status: "Editable", detail: "Question, answer, order and publish status" }].map((section) => (
           <CMSCard key={section.section} title={section.section} detail={section.detail} status={section.status} notify={notify} />
