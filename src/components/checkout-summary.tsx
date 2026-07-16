@@ -4,17 +4,18 @@ import Link from "next/link";
 import { CreditCard, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/components/cart-provider";
-import { formatPrice, getProductById } from "@/lib/products";
+import { formatPrice, getPublicProductById } from "@/lib/products";
 
 export function CheckoutSummary() {
   const { lines, total, removeItem, clearCart } = useCart();
   const [message, setMessage] = useState("");
 
   async function startCheckout() {
+    const liveLines = lines.filter((line) => getPublicProductById(line.id));
     const response = await fetch("/api/checkout", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ lines }),
+      body: JSON.stringify({ lines: liveLines }),
     });
     const payload = (await response.json()) as { message?: string; url?: string };
     if (payload.url) {
@@ -28,19 +29,35 @@ export function CheckoutSummary() {
     return (
       <div className="card" style={{ padding: 24 }}>
         <h2>Your basket is empty</h2>
-        <p className="lead">Add products to prepare a Safna order.</p>
+        <p className="lead">Safna&apos;s products will be available here once the first collection is published.</p>
         <Link className="button yellow" href="/products">
-          Browse products
+          View launch status
         </Link>
+      </div>
+    );
+  }
+
+  const liveLines = lines
+    .map((line) => ({ line, product: getPublicProductById(line.id) }))
+    .filter((item): item is { line: typeof lines[number]; product: NonNullable<ReturnType<typeof getPublicProductById>> } =>
+      Boolean(item.product),
+    );
+
+  if (!liveLines.length) {
+    return (
+      <div className="card" style={{ padding: 24 }}>
+        <h2>Your basket needs refreshing</h2>
+        <p className="lead">The items saved in this browser are not currently published for sale.</p>
+        <button className="button yellow" type="button" onClick={clearCart}>
+          Clear basket
+        </button>
       </div>
     );
   }
 
   return (
     <div className="card" style={{ padding: 24, display: "grid", gap: 16 }}>
-      {lines.map((line) => {
-      const product = getProductById(line.id);
-        if (!product) return null;
+      {liveLines.map(({ line, product }) => {
         return (
           <div key={line.id} style={{ display: "flex", justifyContent: "space-between", gap: 14 }}>
             <div>

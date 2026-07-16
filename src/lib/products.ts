@@ -23,6 +23,7 @@ export type Product = {
   visibility: "Public" | "Hidden";
   isBundle?: boolean;
   featured?: boolean;
+  demoOnly?: boolean;
 };
 
 export const products: Product[] = [
@@ -51,6 +52,7 @@ export const products: Product[] = [
     status: "Published",
     visibility: "Public",
     featured: true,
+    demoOnly: true,
   },
   {
     id: "green-herb-sauce",
@@ -76,6 +78,7 @@ export const products: Product[] = [
     status: "Published",
     visibility: "Public",
     featured: true,
+    demoOnly: true,
   },
   {
     id: "mild-family-sauce",
@@ -101,6 +104,7 @@ export const products: Product[] = [
     status: "Published",
     visibility: "Public",
     featured: true,
+    demoOnly: true,
   },
   {
     id: "all-purpose-seasoning",
@@ -126,6 +130,7 @@ export const products: Product[] = [
     status: "Published",
     visibility: "Public",
     featured: true,
+    demoOnly: true,
   },
   {
     id: "suya-style-spice",
@@ -150,6 +155,7 @@ export const products: Product[] = [
     image: "/safna-logo.jpg",
     status: "Draft",
     visibility: "Hidden",
+    demoOnly: true,
   },
   {
     id: "safna-starter-box",
@@ -175,6 +181,7 @@ export const products: Product[] = [
     status: "Published",
     visibility: "Public",
     isBundle: true,
+    demoOnly: true,
   },
   {
     id: "sauce-lovers-box",
@@ -200,6 +207,7 @@ export const products: Product[] = [
     status: "Published",
     visibility: "Public",
     isBundle: true,
+    demoOnly: true,
   },
   {
     id: "marinade-base",
@@ -224,6 +232,7 @@ export const products: Product[] = [
     image: "/safna-logo.jpg",
     status: "Draft",
     visibility: "Hidden",
+    demoOnly: true,
   },
 ];
 
@@ -239,8 +248,20 @@ export const getProductBySlug = (slug: string) => products.find((product) => pro
 
 export const getProductById = (id: string) => products.find((product) => product.id === id);
 
+const allowDemoStorefront = process.env.NEXT_PUBLIC_DEMO_STOREFRONT === "true";
+
 export const getPublicProducts = () =>
-  products.filter((product) => product.status === "Published" && product.visibility === "Public");
+  products.filter(
+    (product) =>
+      product.status === "Published" &&
+      product.visibility === "Public" &&
+      (!product.demoOnly || allowDemoStorefront),
+  );
+
+export const getPublicProductBySlug = (slug: string) =>
+  getPublicProducts().find((product) => product.slug === slug);
+
+export const getPublicProductById = (id: string) => getPublicProducts().find((product) => product.id === id);
 
 export const getStockLabel = (stock: number) => {
   if (stock <= 0) return "Out of stock";

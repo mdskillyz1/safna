@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { Product, products } from "@/lib/products";
+import { Product, getPublicProductById } from "@/lib/products";
 
 export type CartLine = {
   id: string;
@@ -37,9 +37,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [lines]);
 
   const value = useMemo<CartContextValue>(() => {
-    const count = lines.reduce((sum, line) => sum + line.quantity, 0);
+    const liveLines = lines.filter((line) => getPublicProductById(line.id));
+    const count = liveLines.reduce((sum, line) => sum + line.quantity, 0);
     const total = lines.reduce((sum, line) => {
-      const product = products.find((item) => item.id === line.id);
+      const product = getPublicProductById(line.id);
       return sum + (product?.price || 0) * line.quantity;
     }, 0);
 

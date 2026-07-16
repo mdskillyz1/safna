@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { navItems } from "@/lib/content";
 import { useCart } from "./cart-provider";
 import styles from "./header.module.css";
@@ -12,10 +12,17 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const { count } = useCart();
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header className={styles.header}>
       <Link href="/products" className={styles.announcement}>
-        Launch range coming soon - shop sauces, seasonings and bundles
+        Safna&apos;s first collection is being prepared
       </Link>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.brand} aria-label="Safna home">
@@ -41,7 +48,12 @@ export function Header() {
             <ShoppingBag size={19} />
             <span>{count}</span>
           </Link>
-          <button className={styles.menuButton} onClick={() => setOpen((value) => !value)} aria-label="Open menu">
+          <button
+            className={styles.menuButton}
+            onClick={() => setOpen((value) => !value)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>

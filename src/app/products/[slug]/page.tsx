@@ -2,19 +2,19 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductCard } from "@/components/product-card";
 import { ProductPurchase } from "@/components/product-purchase";
-import { formatPrice, getProductBySlug, getPublicProducts, getStockLabel, products } from "@/lib/products";
+import { formatPrice, getPublicProductBySlug, getPublicProducts, getStockLabel } from "@/lib/products";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
-  return products.map((product) => ({ slug: product.slug }));
+  return getPublicProducts().map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = getPublicProductBySlug(slug);
 
   if (!product) {
     return { title: "Product not found" };
@@ -28,9 +28,9 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = getPublicProductBySlug(slug);
 
-  if (!product || product.status !== "Published" || product.visibility !== "Public") {
+  if (!product) {
     notFound();
   }
 
@@ -45,7 +45,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     ["Shelf life / best-before", product.shelfLife],
     ["Dietary information", product.dietary],
     ["Extra wording", product.extraWording],
-  ];
+  ].filter(([, value]) => Boolean(value?.trim()));
 
   return (
     <>
@@ -85,24 +85,26 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </section>
 
-      <section className="section" style={{ background: "#fff4ad" }}>
-        <div className="container">
-          <div className="page-title">
-            <span className="eyebrow">Food product information</span>
-            <h2 style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)", margin: "18px 0 12px" }}>
-              Clear details before customers buy.
-            </h2>
+      {details.length ? (
+        <section className="section" style={{ background: "#fff4ad" }}>
+          <div className="container">
+            <div className="page-title">
+              <span className="eyebrow">Food product information</span>
+              <h2 style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)", margin: "18px 0 12px" }}>
+                Confirmed details before customers buy.
+              </h2>
+            </div>
+            <div className="grid-2" style={{ marginTop: 24 }}>
+              {details.map(([label, value]) => (
+                <div className="card" key={label} style={{ padding: 22 }}>
+                  <h3>{label}</h3>
+                  <p style={{ color: "#526158", lineHeight: 1.65 }}>{value}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="grid-2" style={{ marginTop: 24 }}>
-            {details.map(([label, value]) => (
-              <div className="card" key={label} style={{ padding: 22 }}>
-                <h3>{label}</h3>
-                <p style={{ color: "#526158", lineHeight: 1.65 }}>{value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       {related.length ? (
         <section className="section">

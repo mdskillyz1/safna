@@ -12,10 +12,10 @@ export default function CheckoutPage() {
       <div className="container grid-2" style={{ alignItems: "start" }}>
         <div className="page-title">
           <span className="eyebrow">Basket</span>
-          <h1>Review your Safna order.</h1>
+          <h1>Safna basket.</h1>
           <p>
-            The basket works locally today. Real card payments, delivery rates, tax, stock checks, and confirmation emails
-            need the selected payment or ecommerce provider before Safna accepts live food-product orders.
+            Checkout will become available after Safna publishes real products and connects live payment, delivery,
+            stock and order-confirmation services.
           </p>
         </div>
         <CheckoutSummary />

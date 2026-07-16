@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getProductById } from "@/lib/products";
+import { getPublicProductById } from "@/lib/products";
 
 type CheckoutLine = {
   id: string;
@@ -16,6 +16,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ url: checkoutUrl });
   }
 
+  const validLines = (body.lines || [])
+    .map((line) => ({ line, product: getPublicProductById(line.id) }))
+    .filter((item) => item.product && item.line.quantity > 0);
+
+  if (!validLines.length) {
+    return NextResponse.json(
+      { message: "No published products are available for checkout yet." },
+      { status: 400 },
+    );
+  }
+
   if (stripeSecretKey && body.lines?.length) {
     const params = new URLSearchParams({
       mode: "payment",
@@ -25,8 +36,7 @@ export async function POST(request: Request) {
       "shipping_address_collection[allowed_countries][0]": "GB",
     });
 
-    body.lines.forEach((line, index) => {
-      const product = getProductById(line.id);
+    validLines.forEach(({ line, product }, index) => {
       if (!product) return;
       const amount = Math.round((product.salePrice || product.price) * 100);
       params.append(`line_items[${index}][quantity]`, String(line.quantity));

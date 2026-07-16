@@ -529,6 +529,90 @@ select {
   line-height: 1.6;
 }
 
+.empty-state {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  border: 1px solid rgba(16, 23, 19, 0.12);
+  border-radius: 18px;
+  padding: clamp(28px, 6vw, 64px);
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 16px 44px rgba(16, 23, 19, 0.07);
+}
+
+.empty-state h1,
+.empty-state h2 {
+  max-width: 820px;
+  margin: 0;
+  font-size: clamp(2.1rem, 5vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.empty-state p {
+  max-width: 680px;
+  margin: 0;
+  color: #526158;
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.empty-state img {
+  border: 4px solid #ffdc3d;
+  border-radius: 12px;
+}
+
+.shop-filter-shell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  border: 1px solid rgba(16, 23, 19, 0.12);
+  border-radius: 14px;
+  margin-top: 28px;
+  padding: 12px;
+  background: #fff;
+}
+
+.shop-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 260px;
+  min-height: 44px;
+  border: 1px solid rgba(16, 23, 19, 0.12);
+  border-radius: 10px;
+  padding: 0 12px;
+}
+
+.shop-search input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  outline: 0;
+}
+
+.shop-filter-shell button {
+  min-height: 44px;
+  border: 1px solid rgba(16, 23, 19, 0.12);
+  border-radius: 10px;
+  padding: 0 12px;
+  background: #fffdf7;
+  color: #101713;
+  font-weight: 800;
+}
+
+.notice-card {
+  border: 1px solid #f1d68d;
+  border-radius: 12px;
+  margin: 22px 0;
+  padding: 14px 16px;
+  background: #fff8dc;
+  color: #5e4a00;
+  line-height: 1.6;
+}
+
 body:has(.admin-shell) > header,
 body:has(.admin-shell) > footer,
 body:has(.admin-login) > header,

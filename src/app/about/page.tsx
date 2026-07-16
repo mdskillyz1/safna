@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Learn about Safna Products and the ecommerce launch vision.",
+  description: "Learn about Safna Products and the upcoming ecommerce launch.",
 };
 
 export default function AboutPage() {
@@ -12,14 +12,14 @@ export default function AboutPage() {
       <div className="container grid-2" style={{ alignItems: "center" }}>
         <div className="page-title">
           <span className="eyebrow">About Safna</span>
-          <h1>A bright food brand for everyday flavour.</h1>
+          <h1>Safna&apos;s ecommerce store is being prepared.</h1>
           <p>
-            Safna Products is being prepared as a modern ecommerce experience for customers who want to browse, compare,
-            and buy sauces, seasonings, bundles, and future food product ranges online.
+            Safna Products is preparing a customer-facing online store. The final product range, packaging, product
+            photography, ingredients, allergens, pricing and delivery setup are still being confirmed by the business.
           </p>
           <p>
-            The site keeps the brand bright and approachable while leaving room for real product photography, ingredients,
-            allergen information, customer accounts, payment integration, fulfilment rules, and admin operations.
+            The public website is now designed to display only content that has been entered, reviewed and published
+            through the backend. Draft product or marketing information is not shown to customers.
           </p>
         </div>
         <Image
