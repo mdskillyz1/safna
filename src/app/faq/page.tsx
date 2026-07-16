@@ -3,7 +3,7 @@ import { faqs } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "FAQ",
-  description: "Frequently asked questions about the upcoming Safna Products online store.",
+  description: "Frequently asked questions about Safna Products, ordering, delivery and food information.",
 };
 
 export default function FAQPage() {
@@ -12,10 +12,9 @@ export default function FAQPage() {
       <div className="container">
         <div className="page-title">
           <span className="eyebrow">FAQ</span>
-          <h1>Helpful answers before the store opens.</h1>
+          <h1>Helpful answers about Safna.</h1>
           <p>
-            Safna will publish product, payment, delivery, food safety and account details after the business confirms
-            them in the backend.
+            Find answers about products, delivery, food information, accounts and ordering.
           </p>
         </div>
         <div style={{ display: "grid", gap: 14, marginTop: 28 }}>

@@ -39,7 +39,7 @@ export function ContactForm() {
           <option>Product enquiry</option>
           <option>Delivery or collection</option>
           <option>Wholesale or partnership</option>
-          <option>Website admin support</option>
+          <option>General customer support</option>
         </select>
       </div>
       <div className="field">

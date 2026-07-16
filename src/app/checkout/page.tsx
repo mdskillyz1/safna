@@ -3,7 +3,7 @@ import { CheckoutSummary } from "@/components/checkout-summary";
 
 export const metadata: Metadata = {
   title: "Checkout",
-  description: "Safna Products checkout summary and payment-provider handoff.",
+  description: "Review your Safna basket and continue to checkout.",
 };
 
 export default function CheckoutPage() {
@@ -13,10 +13,7 @@ export default function CheckoutPage() {
         <div className="page-title">
           <span className="eyebrow">Basket</span>
           <h1>Safna basket.</h1>
-          <p>
-            Checkout will become available after Safna publishes real products and connects live payment, delivery,
-            stock and order-confirmation services.
-          </p>
+          <p>Review your items, check your total and continue to secure payment when you are ready.</p>
         </div>
         <CheckoutSummary />
       </div>

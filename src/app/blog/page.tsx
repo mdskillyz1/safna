@@ -16,8 +16,8 @@ export default function BlogPage() {
       <div className="container">
         <div className="page-title">
           <span className="eyebrow">Blog</span>
-          <h1>Safna content will appear here when published.</h1>
-          <p>Recipes, product guides and announcements are hidden until Safna publishes genuine content from the backend.</p>
+          <h1>Recipes, product ideas and Safna news.</h1>
+          <p>Find serving ideas, product guides, storage tips and updates from Safna.</p>
         </div>
         {publishedPosts.length ? (
           <div className="grid-3" style={{ marginTop: 28 }}>
@@ -35,10 +35,10 @@ export default function BlogPage() {
         ) : (
           <div className="empty-state" style={{ marginTop: 28 }}>
             <BookOpen size={34} />
-            <h2>No published posts yet.</h2>
-            <p>Safna can publish recipes, product education and launch news from the admin CMS when ready.</p>
+            <h2>Recipe ideas are coming soon.</h2>
+            <p>Safna will share recipes, product guides and kitchen inspiration here.</p>
             <Link className="button yellow" href="/contact">
-              Join the launch list
+              Get updates
             </Link>
           </div>
         )}

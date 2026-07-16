@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bell, BookOpen, Gift, ImagePlus, Mail, Search, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Gift, Mail, Search, ShieldCheck, Sparkles } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
 import { PromoPopup } from "@/components/promo-popup";
 import { blogPosts, promoCampaigns, reviews, site, storefrontTiles } from "@/lib/content";
@@ -29,16 +29,17 @@ export default function Home() {
               <Sparkles size={16} /> Safna Products
             </span>
             <h1>
-              <span>FIRST COLLECTION.</span>
-              <span>BEING PREPARED.</span>
+              <span>SAUCES.</span>
+              <span>SEASONINGS.</span>
+              <span>FOOD PRODUCTS.</span>
             </h1>
             <p>
-              Safna&apos;s public store will open once the product range, prices, photos, ingredients, allergens and
-              delivery details have been confirmed by the business.
+              Browse Safna&apos;s growing range of flavour-packed food products, kitchen staples, sets and recipe ideas for
+              everyday meals.
             </p>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
               <Link className="button dark" href="/contact">
-                Join the launch list <ArrowRight size={18} />
+                Get product updates <ArrowRight size={18} />
               </Link>
               <Link className="button secondary" href="/about">
                 Learn about Safna
@@ -64,12 +65,12 @@ export default function Home() {
         <section className="promo-band">
           <div className="container promo-band-inner">
             <div>
-              <span className="eyebrow">Promotion builder</span>
+              <span className="eyebrow">Safna offers</span>
               <h2>{activePromo.title}</h2>
               <p>{activePromo.body}</p>
             </div>
             <Link className="button dark" href={`mailto:${site.email}?subject=Safna%20launch%20list`}>
-              Join now <ArrowRight size={18} />
+              Sign up <ArrowRight size={18} />
             </Link>
           </div>
         </section>
@@ -79,13 +80,13 @@ export default function Home() {
         <div className="container grid-2" style={{ alignItems: "center" }}>
           <div>
             <span className="eyebrow">
-              <ShieldCheck size={16} /> Published content only
+              <ShieldCheck size={16} /> Food details
             </span>
-            <h2 className="display-title">No placeholder products. No invented reviews. No fake prices.</h2>
+            <h2 className="display-title">Clear product information before you buy.</h2>
           </div>
           <p className="lead">
-            The customer website now hides draft and demo data. Products, reviews, recipes, delivery information and
-            promotions appear only after they are published through the Safna backend.
+            Safna product pages are set up for ingredients, allergens, storage advice, shelf life, dietary notes, prices,
+            stock status and delivery information, so customers can shop with confidence.
           </p>
         </div>
       </section>
@@ -104,7 +105,7 @@ export default function Home() {
                 <Link className="category-tile" href={`/products?category=${category}`} key={category}>
                   <span />
                   <h3>{category}</h3>
-                  <p>Published Safna products in this category.</p>
+                  <p>Browse Safna products in this category.</p>
                 </Link>
               ))}
             </div>
@@ -118,7 +119,7 @@ export default function Home() {
             <div className="section-heading">
               <div>
                 <span className="eyebrow">Featured products</span>
-                <h2 className="display-title">Published by Safna.</h2>
+                <h2 className="display-title">Customer favourites.</h2>
               </div>
               <Link className="button secondary" href="/products">
                 Shop all
@@ -137,15 +138,15 @@ export default function Home() {
             <div className="empty-state">
               <Image src="/safna-logo.jpg" alt="Safna Products logo" width={180} height={205} />
               <span className="eyebrow">
-                <Bell size={16} /> Launch list
+                <Mail size={16} /> Product updates
               </span>
-              <h2>Safna&apos;s first collection is being prepared.</h2>
+              <h2>Safna products are coming to the online shop.</h2>
               <p>
-                The store will display products only after the final names, pricing, photos, ingredients, allergens,
-                stock and delivery settings are published by the admin team.
+                New sauces, seasonings, bundles, pantry products and gift boxes will appear here as they become
+                available. Contact Safna to ask about current availability.
               </p>
               <Link className="button yellow" href={`mailto:${site.email}?subject=Safna%20launch%20list`}>
-                <Mail size={18} /> Register interest
+                <Mail size={18} /> Get updates
               </Link>
             </div>
           </div>
@@ -156,13 +157,13 @@ export default function Home() {
         <div className="container grid-2" style={{ alignItems: "center" }}>
           <div>
             <span className="eyebrow">
-              <ImagePlus size={16} /> CMS controlled
+              <BookOpen size={16} /> Recipes and ideas
             </span>
-            <h2 className="display-title">Photos, recipes and reviews will appear when they are real.</h2>
+            <h2 className="display-title">Meal ideas for sauces, seasonings and sets.</h2>
           </div>
           <p className="lead" style={{ color: "#dce5dd" }}>
-            Homepage sections for recipes, customer reviews, bundles and product education are prepared, but hidden until
-            approved content exists in the backend.
+            Explore ways to use Safna products with grilled food, rice dishes, wraps, marinades, family meals and gift
+            boxes as the range grows.
           </p>
         </div>
       </section>
@@ -171,16 +172,16 @@ export default function Home() {
         <div className="container">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">Customer journey</span>
-              <h2 className="display-title">Browse, learn, add to bag, then checkout.</h2>
+              <span className="eyebrow">Shopping made simple</span>
+              <h2 className="display-title">Find your flavour and order with ease.</h2>
             </div>
           </div>
           <div className="journey-grid">
             {[
-              ["Search products", "The header search expands into a product finder and hides unapproved catalogue data."],
-              ["Build a basket", "The bag drawer opens from any page and blocks stale or unpublished items from checkout."],
-              ["Create an account", "Account screens are ready for login, saved addresses, repeat orders and preferences."],
-              ["Preview first", "Admin edits can be reviewed before the content is pushed live to customers."],
+              ["Search products", "Use the search icon to find sauces, seasonings, sets and recipe inspiration quickly."],
+              ["Build your bag", "Add products to your bag, review your total and continue to checkout when ready."],
+              ["Create an account", "Keep order history, saved addresses, repeat orders and marketing preferences in one place."],
+              ["UK delivery", "Delivery options, fees and order notes will be shown clearly during checkout."],
             ].map(([title, body]) => (
               <article key={title}>
                 <strong>{title}</strong>
@@ -226,11 +227,11 @@ export default function Home() {
           <h2>{hasProducts ? "Shop Safna Products" : "Safna Products"}</h2>
           <p>
             {hasProducts
-              ? "Browse the products Safna has published for online ordering."
-              : "Join the launch list and Safna will share updates when the first collection is ready."}
+              ? "Browse Safna sauces, seasonings, sets and pantry products online."
+              : "Sign up for updates and Safna will share product news, offers and ordering information."}
           </p>
           <Link className="button yellow" href={hasProducts ? "/products" : "/contact"}>
-            {hasProducts ? "Shop products" : "Contact Safna"}
+            {hasProducts ? "Shop products" : "Get updates"}
           </Link>
         </div>
       </section>

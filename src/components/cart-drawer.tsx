@@ -49,17 +49,17 @@ export function CartDrawer() {
         <div className="bag-body">
           {!lines.length ? (
             <div className="bag-empty">
-              <strong>Safna products are not live yet.</strong>
-              <p>The bag is ready for launch. Published products will appear here once the backend content is approved.</p>
+              <strong>Your bag is empty.</strong>
+              <p>Browse Safna products and add your favourites when they are available online.</p>
               <Link className="button yellow" href="/products" onClick={closeBag}>
-                View launch status
+                Shop products
               </Link>
             </div>
           ) : null}
 
           {hasStaleItems ? (
             <div className="bag-warning">
-              Some saved items are no longer published for sale. Clear the bag before checkout.
+              Some saved items are no longer available. Clear the bag before checkout.
             </div>
           ) : null}
 

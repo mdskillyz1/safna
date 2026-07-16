@@ -22,13 +22,13 @@ export const storefrontTiles = [
   {
     label: "Safna Sets",
     href: "/products?category=Bundles",
-    description: "Bundles, gift boxes and future multi-product collections.",
+    description: "Bundles, gift boxes and multi-product collections.",
     status: "Published" as PublishStatus,
   },
   {
     label: "Shop All",
     href: "/products",
-    description: "The full public catalogue once products are approved.",
+    description: "Browse sauces, seasonings, pantry products and more.",
     status: "Published" as PublishStatus,
   },
   {
@@ -42,15 +42,15 @@ export const storefrontTiles = [
 export const promoCampaigns = [
   {
     id: "launch-list",
-    title: "Join the Safna launch list",
-    body: "Be first to hear when the first product collection, delivery options and recipes go live.",
+    title: "Get Safna product updates",
+    body: "Be first to hear about new products, recipes, offers and ordering updates from Safna.",
     placement: "Homepage popup and launch sections",
     status: "Published" as PublishStatus,
   },
   {
     id: "recipe-book",
     title: "Free recipe e-book",
-    body: "Prepared as a future campaign once Safna has approved recipe content and product photos.",
+    body: "Recipe ideas and serving inspiration for sauces, seasonings and family meals.",
     placement: "Recipe pages and checkout drawer",
     status: "Draft" as PublishStatus,
   },
@@ -64,21 +64,21 @@ export const faqs = [
   {
     question: "When will Safna products be available to buy?",
     answer:
-      "Safna's first public collection is being prepared. The store will show products only after the business has confirmed and published the final details.",
+      "Safna is preparing online ordering for sauces, seasonings, bundles and pantry products. Contact Safna for the latest availability.",
   },
   {
-    question: "Why are there no products showing yet?",
+    question: "Why are some products not showing yet?",
     answer:
-      "Unconfirmed products, prices, ingredients, allergens, reviews and delivery details are kept out of the customer website until they are approved in the admin backend.",
+      "Some products are still being finalised. New items will be added as soon as they are ready for customers to browse and order.",
   },
   {
-    question: "Can I join a launch list?",
+    question: "Can I get product updates?",
     answer:
-      "Yes. Use the contact form to register interest until the newsletter provider is connected.",
+      "Yes. Use the contact form to register your interest in product news, offers and ordering updates.",
   },
   {
     question: "Where will allergen and storage information appear?",
     answer:
-      "Each published food product page will show completed ingredients, allergens, storage, shelf-life and dietary information. Blank or draft fields are hidden from customers.",
+      "Each product page is set up to show ingredients, allergens, storage, shelf-life and dietary information where relevant.",
   },
 ];

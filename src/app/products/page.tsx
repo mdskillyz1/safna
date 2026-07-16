@@ -6,7 +6,7 @@ import { categories, getPublicProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "Safna Products catalogue. Products appear after they are confirmed and published by the Safna admin team.",
+  description: "Shop Safna Products sauces, seasonings, sets, pantry products and gift ideas online.",
 };
 
 export default function ProductsPage() {
@@ -19,15 +19,15 @@ export default function ProductsPage() {
         <div className="container">
           <div className="empty-state">
             <span className="eyebrow">
-              <Bell size={16} /> Store opening soon
+              <Bell size={16} /> Products
             </span>
-            <h1>Safna&apos;s first collection is being prepared.</h1>
+            <h1>Safna products are coming soon.</h1>
             <p>
-              No products are published yet. Safna will add products here only after names, prices, photos, ingredients,
-              allergens, stock and delivery details have been confirmed.
+              Safna is preparing sauces, seasonings, bundles, pantry products and gift boxes for online ordering. Contact
+              Safna for current availability or product updates.
             </p>
             <Link className="button yellow" href="/contact">
-              Join the launch list
+              Get product updates
             </Link>
           </div>
         </div>
@@ -40,14 +40,14 @@ export default function ProductsPage() {
       <div className="container">
         <div className="page-title">
           <span className="eyebrow">Shop Safna</span>
-          <h1>Published Safna products.</h1>
-          <p>Every product shown here has been published from the Safna backend.</p>
+          <h1>Safna products.</h1>
+          <p>Browse sauces, seasonings, sets and pantry products from Safna.</p>
         </div>
 
         <div className="shop-filter-shell" aria-label="Product filters">
           <label className="shop-search">
             <Search size={18} />
-            <input placeholder="Search published products" />
+            <input placeholder="Search products" />
           </label>
           <button type="button">Availability</button>
           <button type="button">Price</button>
@@ -55,7 +55,7 @@ export default function ProductsPage() {
           <button type="button">Clear filters</button>
         </div>
 
-        <p style={{ color: "#526158", marginTop: 18 }}>{products.length} published product{products.length === 1 ? "" : "s"}</p>
+        <p style={{ color: "#526158", marginTop: 18 }}>{products.length} product{products.length === 1 ? "" : "s"}</p>
 
         {activeCategories.map((category) => (
           <div key={category} style={{ marginTop: 44 }}>

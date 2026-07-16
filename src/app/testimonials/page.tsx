@@ -14,8 +14,8 @@ export default function TestimonialsPage() {
       <div className="container">
         <div className="page-title">
           <span className="eyebrow">Reviews</span>
-          <h1>Genuine customer reviews will appear here.</h1>
-          <p>Safna will show only approved, real reviews after customers submit feedback.</p>
+          <h1>Customer reviews.</h1>
+          <p>See what customers say about Safna products as feedback comes in.</p>
         </div>
         {reviews.length ? (
           <div className="grid-3" style={{ marginTop: 28 }}>
@@ -30,8 +30,8 @@ export default function TestimonialsPage() {
         ) : (
           <div className="empty-state" style={{ marginTop: 28 }}>
             <Star size={34} />
-            <h2>No public reviews yet.</h2>
-            <p>Reviews are hidden until approved through the Safna admin dashboard.</p>
+            <h2>Reviews are coming soon.</h2>
+            <p>Customer feedback will appear here as Safna starts taking online orders.</p>
             <Link className="button yellow" href="/contact">
               Contact Safna
             </Link>

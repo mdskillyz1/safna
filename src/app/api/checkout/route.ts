@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
   if (!validLines.length) {
     return NextResponse.json(
-      { message: "No published products are available for checkout yet." },
+      { message: "The selected products are not available for checkout right now." },
       { status: 400 },
     );
   }

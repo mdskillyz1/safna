@@ -15,8 +15,7 @@ export function Footer() {
           <div>
             <strong style={{ fontSize: "1.5rem" }}>Safna Products</strong>
             <p style={{ color: "#dce5dd", lineHeight: 1.7 }}>
-              Safna&apos;s public store is being prepared. Products and claims appear only after they are published by the
-              business.
+              Sauces, seasonings, sets, pantry products and gift ideas for flavour-packed meals.
             </p>
           </div>
           <div>
@@ -42,7 +41,7 @@ export function Footer() {
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", color: "#dce5dd" }}>
           <span>© {new Date().getFullYear()} Safna Products. All rights reserved.</span>
-          <span>Published backend content only.</span>
+          <span>Safna Products online.</span>
         </div>
       </div>
       <a className="button whatsapp" href={whatsappHref} aria-label="Message Safna">

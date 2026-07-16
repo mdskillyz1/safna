@@ -22,16 +22,16 @@ export function CheckoutSummary() {
       window.location.href = payload.url;
       return;
     }
-    setMessage(payload.message || "Checkout provider needs to be connected.");
+    setMessage(payload.message || "Checkout is not available for these items right now.");
   }
 
   if (!lines.length) {
     return (
       <div className="card" style={{ padding: 24 }}>
         <h2>Your basket is empty</h2>
-        <p className="lead">Safna&apos;s products will be available here once the first collection is published.</p>
+        <p className="lead">Browse Safna products and add your favourites when they are available online.</p>
         <Link className="button yellow" href="/products">
-          View launch status
+          Shop products
         </Link>
       </div>
     );
@@ -47,7 +47,7 @@ export function CheckoutSummary() {
     return (
       <div className="card" style={{ padding: 24 }}>
         <h2>Your basket needs refreshing</h2>
-        <p className="lead">The items saved in this browser are not currently published for sale.</p>
+        <p className="lead">The items saved in this browser are not currently available for sale.</p>
         <button className="button yellow" type="button" onClick={clearCart}>
           Clear basket
         </button>

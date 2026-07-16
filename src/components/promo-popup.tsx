@@ -28,7 +28,7 @@ export function PromoPopup() {
       <button type="button" aria-label="Close promotion" onClick={dismiss}>
         <X size={18} />
       </button>
-      <span>Launch offer</span>
+      <span>Safna updates</span>
       <strong>{campaign.title}</strong>
       <p>{campaign.body}</p>
       <Link className="button yellow" href={`mailto:${site.email}?subject=Safna%20launch%20list`} onClick={dismiss}>

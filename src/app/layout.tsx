@@ -10,15 +10,15 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Safna Products | Store opening soon",
+    default: "Safna Products | Sauces, Seasonings and Food Products",
     template: "%s | Safna Products",
   },
   description:
-    "Safna Products is preparing its online store. Products, prices, ingredients, allergens, reviews, recipes, and delivery details appear only when published by the business.",
+    "Shop Safna Products for sauces, seasonings, sets, pantry products, recipes and food product updates.",
   keywords: ["Safna", "Safna Products", "sauces", "seasonings", "food products", "online shop", "ecommerce"],
   openGraph: {
     title: "Safna Products",
-    description: "Safna Products is preparing its online store with published backend content only.",
+    description: "Sauces, seasonings, sets and pantry products from Safna Products.",
     url: site.url,
     siteName: "Safna Products",
     images: [{ url: "/safna-logo.jpg", width: 1320, height: 1506 }],

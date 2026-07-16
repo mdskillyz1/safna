@@ -49,7 +49,7 @@ export function Header() {
   return (
     <header className={styles.header}>
       <Link href="/products" className={styles.announcement}>
-        Launch list open - Safna&apos;s first collection is being prepared
+        Safna food products, sauces, seasonings and sets
       </Link>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.brand} aria-label="Safna home">
@@ -109,7 +109,7 @@ export function Header() {
                 autoFocus
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search sauces, sets, seasonings and future products"
+                placeholder="Search sauces, sets, seasonings and recipes"
               />
             </label>
             <div className={styles.searchResults}>
@@ -122,8 +122,8 @@ export function Header() {
                 ))
               ) : (
                 <div>
-                  <span>Store opening soon</span>
-                  <strong>No published products match yet.</strong>
+                  <span>Product search</span>
+                  <strong>No products match that search yet.</strong>
                 </div>
               )}
             </div>
@@ -138,9 +138,6 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Link href="/admin" onClick={() => setOpen(false)}>
-            Admin
-          </Link>
         </nav>
       ) : null}
     </header>

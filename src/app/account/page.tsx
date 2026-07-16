@@ -4,7 +4,7 @@ import { UserRound } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Customer Account",
-  description: "Safna customer accounts will be enabled after secure authentication and live orders are configured.",
+  description: "Safna customer account area for orders, saved addresses and preferences.",
 };
 
 export default function AccountPage() {
@@ -14,13 +14,13 @@ export default function AccountPage() {
         <div className="empty-state">
           <UserRound size={38} />
           <span className="eyebrow">Customer accounts</span>
-          <h1>Accounts will open with the Safna store.</h1>
+          <h1>Your Safna account.</h1>
           <p>
-            Registration, login, saved addresses, order history and repeat ordering will be enabled after secure
-            authentication, payment processing and order storage are connected.
+            Soon you will be able to sign in, view your orders, save addresses, repeat previous orders and manage your
+            product updates from one place.
           </p>
           <Link className="button yellow" href="/contact">
-            Request launch updates
+            Get product updates
           </Link>
         </div>
       </div>

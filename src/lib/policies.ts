@@ -31,12 +31,12 @@ export const policies: Policy[] = [
   {
     slug: "returns-and-refunds",
     title: "Returns and Refunds Policy",
-    summary: "Draft returns and refund wording for food-product ecommerce.",
+    summary: "Returns and refund guidance for Safna food-product orders.",
     body: [
       "Because Safna sells food products, returns may be limited for safety and hygiene reasons unless an item is faulty, damaged, incorrect, or not as described.",
       "Customers should contact Safna as soon as possible with their order number, photos, and a description of the issue.",
       "Refunds or replacements will be reviewed case by case and processed according to UK consumer law.",
-      "Final returns wording should be reviewed before launch once packaging, delivery partner, and product handling rules are confirmed.",
+      "If a refund is approved, Safna will process it back to the original payment method where possible.",
     ],
   },
   {
@@ -44,10 +44,10 @@ export const policies: Policy[] = [
     title: "Shipping Policy",
     summary: "UK delivery approach, fees, timing, and fulfilment notes.",
     body: [
-      "Safna currently prepares for UK delivery only. Delivery zones, courier partner, shipping fees, and free-delivery thresholds are managed from the admin dashboard.",
-      "Customers will see delivery options during checkout once the final shipping setup is confirmed.",
+      "Safna currently prepares for UK delivery only. Delivery zones, courier partner, shipping fees, and free-delivery thresholds will be shown clearly during checkout.",
+      "Customers will see available delivery options during checkout.",
       "Orders may be subject to cut-off times, stock availability, packaging requirements, and courier schedules.",
-      "Delivery information should be updated before launch once the delivery partner and final fees are confirmed.",
+      "Safna will share order and delivery updates using the contact details provided at checkout.",
     ],
   },
   {
@@ -58,7 +58,7 @@ export const policies: Policy[] = [
       "Safna product pages include space for ingredients, allergens, storage instructions, and best-before or shelf-life details.",
       "Customers should always follow the storage instructions shown on the product label and product page.",
       "Products should not be consumed after the stated best-before or use-by date where applicable.",
-      "Final food safety wording must be confirmed by Safna before accepting live orders.",
+      "Customers should contact Safna before ordering if they need more information about storage, handling or suitability.",
     ],
   },
   {
@@ -68,7 +68,7 @@ export const policies: Policy[] = [
     body: [
       "Safna product pages include allergen information for each product where supplied.",
       "Customers with allergies or intolerances should read the product page and product label carefully before purchase and consumption.",
-      "Safna must confirm whether products are prepared, packed, or stored in an environment that handles allergens such as nuts, peanuts, sesame, gluten, milk, egg, soya, mustard, celery, sulphites, fish, crustaceans, molluscs, or lupin.",
+      "Product labels and product pages will explain allergen information where available, including whether a product is prepared, packed, or stored around common allergens.",
       "Customers should contact Safna before ordering if they are unsure whether a product is suitable for their dietary needs.",
     ],
   },
