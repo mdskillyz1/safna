@@ -29,9 +29,23 @@
 }
 
 .brand {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  flex: 0 0 auto;
+  min-width: 84px;
+  min-height: 84px;
+  justify-content: center;
+  border-radius: 8px;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+.brand:focus-visible {
+  outline: 3px solid #101713;
+  outline-offset: 3px;
 }
 
 .brand img {

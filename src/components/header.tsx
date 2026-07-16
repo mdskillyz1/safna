@@ -46,19 +46,25 @@ export function Header() {
     };
   }, [open]);
 
+  function closeHeaderPanels() {
+    setOpen(false);
+    setSearchOpen(false);
+    setQuery("");
+  }
+
   return (
     <header className={styles.header}>
       <Link href="/products" className={styles.announcement}>
         Safna food products, sauces, seasonings and sets
       </Link>
       <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.brand} aria-label="Safna home">
+        <Link href="/" className={styles.brand} aria-label="Safna home" onClick={closeHeaderPanels}>
           <Image src="/safna-logo.jpg" alt="Safna Products logo" width={78} height={88} priority />
         </Link>
 
         <nav className={`${styles.desktop} ${styles.shopNav}`} aria-label="Shop navigation">
           {shopLinks.map((item) => (
-            <Link key={item.href} href={item.href}>
+            <Link key={item.href} href={item.href} onClick={closeHeaderPanels}>
               {item.label}
             </Link>
           ))}
@@ -66,7 +72,7 @@ export function Header() {
 
         <nav className={`${styles.desktop} ${styles.storyNav}`} aria-label="Brand navigation">
           {storyLinks.map((item) => (
-            <Link key={item.href} href={item.href}>
+            <Link key={item.href} href={item.href} onClick={closeHeaderPanels}>
               {item.label}
             </Link>
           ))}
