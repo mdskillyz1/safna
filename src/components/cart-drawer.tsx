@@ -3,17 +3,11 @@
 import Link from "next/link";
 import { ArrowRight, ShoppingBag, Trash2, X } from "lucide-react";
 import { useEffect } from "react";
-import { formatPrice, getPublicProductById } from "@/lib/products";
+import { formatPrice } from "@/lib/products";
 import { useCart } from "./cart-provider";
 
 export function CartDrawer() {
   const { bagOpen, closeBag, clearCart, lines, removeItem, total } = useCart();
-  const liveLines = lines
-    .map((line) => ({ line, product: getPublicProductById(line.id) }))
-    .filter((item): item is { line: typeof lines[number]; product: NonNullable<ReturnType<typeof getPublicProductById>> } =>
-      Boolean(item.product),
-    );
-  const hasStaleItems = lines.length > liveLines.length;
 
   useEffect(() => {
     document.body.style.overflow = bagOpen ? "hidden" : "";
@@ -57,25 +51,19 @@ export function CartDrawer() {
             </div>
           ) : null}
 
-          {hasStaleItems ? (
-            <div className="bag-warning">
-              Some saved items are no longer available. Clear the bag before checkout.
-            </div>
-          ) : null}
-
-          {liveLines.map(({ line, product }) => (
+          {lines.map((line) => (
             <article className="bag-line" key={line.id}>
-              <div className="bag-thumb" style={{ "--bag-colour": product.colour } as React.CSSProperties}>
-                {product.name.charAt(0)}
+              <div className="bag-thumb" style={{ "--bag-colour": line.colour } as React.CSSProperties}>
+                {line.name.charAt(0)}
               </div>
               <div>
-                <strong>{product.name}</strong>
+                <strong>{line.name}</strong>
                 <button type="button" className="bag-view">
-                  {line.quantity} item{line.quantity === 1 ? "" : "s"} · {product.size}
+                  {line.quantity} item{line.quantity === 1 ? "" : "s"} · {line.size}
                 </button>
-                <p>{line.quantity} x {formatPrice(product.salePrice || product.price)}</p>
+                <p>{line.quantity} x {formatPrice(line.salePrice || line.price)}</p>
               </div>
-              <button type="button" aria-label={`Remove ${product.name}`} onClick={() => removeItem(line.id)}>
+              <button type="button" aria-label={`Remove ${line.name}`} onClick={() => removeItem(line.id)}>
                 <Trash2 size={17} />
               </button>
             </article>
@@ -88,7 +76,7 @@ export function CartDrawer() {
             <strong>{formatPrice(total)}</strong>
           </div>
           <Link className="bag-checkout" href="/checkout" onClick={closeBag}>
-            Checkout {liveLines.length ? `· ${formatPrice(total)}` : ""} <ArrowRight size={18} />
+            Checkout {lines.length ? `· ${formatPrice(total)}` : ""} <ArrowRight size={18} />
           </Link>
           <Link href="/contact" onClick={closeBag}>
             Need help before ordering?

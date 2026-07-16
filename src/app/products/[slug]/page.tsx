@@ -1,20 +1,23 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ProductCard } from "@/components/product-card";
 import { ProductPurchase } from "@/components/product-purchase";
-import { formatPrice, getPublicProductBySlug, getPublicProducts, getStockLabel } from "@/lib/products";
+import { getCatalogProductBySlug, getCatalogProducts } from "@/lib/catalog";
+import { formatPrice, getStockLabel } from "@/lib/products";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return getPublicProducts().map((product) => ({ slug: product.slug }));
+export async function generateStaticParams() {
+  const products = await getCatalogProducts();
+  return products.map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getPublicProductBySlug(slug);
+  const product = await getCatalogProductBySlug(slug);
 
   if (!product) {
     return { title: "Product not found" };
@@ -28,13 +31,13 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = getPublicProductBySlug(slug);
+  const product = await getCatalogProductBySlug(slug);
 
   if (!product) {
     notFound();
   }
 
-  const related = getPublicProducts()
+  const related = (await getCatalogProducts())
     .filter((item) => item.category === product.category && item.id !== product.id)
     .slice(0, 3);
 
@@ -53,11 +56,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="container grid-2" style={{ alignItems: "start" }}>
           <div className="product-card" style={{ padding: 18 }}>
             <div className="product-packshot" style={{ "--pack-colour": product.colour } as React.CSSProperties}>
-              <span>{product.category}</span>
-              <strong>{product.name.split(" ")[0]}</strong>
+              {product.image && product.image !== "/safna-logo.jpg" ? (
+                <Image src={product.image} alt={product.name} width={900} height={900} />
+              ) : (
+                <>
+                  <span>{product.category}</span>
+                  <strong>{product.name.split(" ")[0]}</strong>
+                </>
+              )}
             </div>
             <p style={{ color: "#526158", lineHeight: 1.7 }}>
-              Product photography and final packaging imagery will appear here as the Safna range is completed.
+              Safna product information, food details and serving ideas are shown clearly before checkout.
             </p>
           </div>
 

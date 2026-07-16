@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Bell, Search } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
-import { categories, getPublicProducts } from "@/lib/products";
+import { getCatalogProducts } from "@/lib/catalog";
+import { categories } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Products",
   description: "Shop Safna Products sauces, seasonings, sets, pantry products and gift ideas online.",
 };
 
-export default function ProductsPage() {
-  const products = getPublicProducts();
+export default async function ProductsPage() {
+  const products = await getCatalogProducts();
   const activeCategories = categories.filter((category) => products.some((product) => product.category === category));
 
   if (!products.length) {

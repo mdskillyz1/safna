@@ -3,11 +3,12 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Gift, Mail, Search, ShieldCheck, Sparkles } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
 import { PromoPopup } from "@/components/promo-popup";
+import { getCatalogProducts } from "@/lib/catalog";
 import { blogPosts, promoCampaigns, reviews, site, storefrontTiles } from "@/lib/content";
-import { categories, getPublicProducts } from "@/lib/products";
+import { categories } from "@/lib/products";
 
-export default function Home() {
-  const products = getPublicProducts();
+export default async function Home() {
+  const products = await getCatalogProducts();
   const featured = products.filter((product) => product.featured).slice(0, 4);
   const activeCategories = categories.filter((category) => products.some((product) => product.category === category));
   const publishedPosts = blogPosts.filter((post) => post.status === "Published");

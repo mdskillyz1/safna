@@ -24,6 +24,8 @@ export type Product = {
   isBundle?: boolean;
   featured?: boolean;
   demoOnly?: boolean;
+  shopifyProductId?: string;
+  shopifyVariantId?: string;
 };
 
 export const products: Product[] = [

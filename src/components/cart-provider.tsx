@@ -5,6 +5,15 @@ import { Product, getPublicProductById } from "@/lib/products";
 
 export type CartLine = {
   id: string;
+  merchandiseId?: string;
+  slug: string;
+  name: string;
+  size: string;
+  price: number;
+  salePrice?: number;
+  stock: number;
+  colour: string;
+  image: string;
   quantity: number;
 };
 
@@ -22,18 +31,47 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+function productToLine(product: Product, quantity = 1): CartLine {
+  return {
+    id: product.id,
+    merchandiseId: product.shopifyVariantId,
+    slug: product.slug,
+    name: product.name,
+    size: product.size,
+    price: product.price,
+    salePrice: product.salePrice,
+    stock: product.stock,
+    colour: product.colour,
+    image: product.image,
+    quantity,
+  };
+}
+
+function normaliseSavedLines(value: string | null) {
+  if (!value) return [];
+
+  try {
+    const saved = JSON.parse(value) as Array<Partial<CartLine> & { id: string; quantity: number }>;
+    return saved.flatMap((line) => {
+      if (line.name && typeof line.price === "number") {
+        return [{ ...line, quantity: Math.max(1, line.quantity) } as CartLine];
+      }
+
+      const product = getPublicProductById(line.id);
+      return product ? [productToLine(product, line.quantity)] : [];
+    });
+  } catch {
+    return [];
+  }
+}
+
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [bagOpen, setBagOpen] = useState(false);
   const [lines, setLines] = useState<CartLine[]>(() => {
     if (typeof window === "undefined") {
       return [];
     }
-    try {
-      const saved = window.localStorage.getItem("safna-cart");
-      return saved ? (JSON.parse(saved) as CartLine[]) : [];
-    } catch {
-      return [];
-    }
+    return normaliseSavedLines(window.localStorage.getItem("safna-cart"));
   });
 
   useEffect(() => {
@@ -41,11 +79,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [lines]);
 
   const value = useMemo<CartContextValue>(() => {
-    const liveLines = lines.filter((line) => getPublicProductById(line.id));
-    const count = liveLines.reduce((sum, line) => sum + line.quantity, 0);
+    const count = lines.reduce((sum, line) => sum + line.quantity, 0);
     const total = lines.reduce((sum, line) => {
-      const product = getPublicProductById(line.id);
-      return sum + (product?.price || 0) * line.quantity;
+      return sum + (line.salePrice || line.price) * line.quantity;
     }, 0);
 
     return {
@@ -60,7 +96,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
               line.id === product.id ? { ...line, quantity: line.quantity + 1 } : line,
             );
           }
-          return [...current, { id: product.id, quantity: 1 }];
+          return [...current, productToLine(product)];
         });
         setBagOpen(true);
       },

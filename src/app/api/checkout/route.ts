@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
+import { createShopifyCart, isShopifyConfigured } from "@/lib/shopify";
 import { getPublicProductById } from "@/lib/products";
 
 type CheckoutLine = {
   id: string;
+  merchandiseId?: string;
   quantity: number;
 };
 
@@ -11,6 +13,18 @@ export async function POST(request: Request) {
   const checkoutUrl = process.env.CHECKOUT_URL;
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://safna-mu.vercel.app";
+
+  if (isShopifyConfigured()) {
+    try {
+      const url = await createShopifyCart(body.lines || []);
+      return NextResponse.json({ url });
+    } catch (error) {
+      return NextResponse.json(
+        { message: error instanceof Error ? error.message : "Shopify checkout could not be created." },
+        { status: 400 },
+      );
+    }
+  }
 
   if (checkoutUrl) {
     return NextResponse.json({ url: checkoutUrl });
@@ -69,6 +83,6 @@ export async function POST(request: Request) {
 
   return NextResponse.json({
     message:
-      "Stripe checkout is ready. Add STRIPE_SECRET_KEY and NEXT_PUBLIC_SITE_URL in Vercel before taking live payments.",
+      "Checkout is ready to connect. Add Shopify Storefront API credentials in Vercel before taking live payments.",
   });
 }

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { getPublicProducts } from "@/lib/products";
+import { getPublicProducts, type Product } from "@/lib/products";
 import { useCart } from "./cart-provider";
 import styles from "./header.module.css";
 
@@ -20,12 +20,14 @@ const storyLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+type SearchProduct = Pick<Product, "id" | "slug" | "name" | "category" | "description">;
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [products, setProducts] = useState<SearchProduct[]>(() => getPublicProducts());
   const { count, openBag } = useCart();
-  const products = getPublicProducts();
   const results = useMemo(() => {
     const cleanQuery = query.trim().toLowerCase();
     if (!cleanQuery) return products.slice(0, 4);
@@ -45,6 +47,25 @@ export function Header() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  useEffect(() => {
+    if (!searchOpen) return;
+
+    let cancelled = false;
+
+    fetch("/api/products")
+      .then((response) => response.json())
+      .then((payload: { products?: SearchProduct[] }) => {
+        if (!cancelled && payload.products?.length) {
+          setProducts(payload.products);
+        }
+      })
+      .catch(() => undefined);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [searchOpen]);
 
   function closeHeaderPanels() {
     setOpen(false);

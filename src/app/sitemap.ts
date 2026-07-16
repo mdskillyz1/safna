@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next";
+import { getCatalogProducts } from "@/lib/catalog";
 import { site } from "@/lib/content";
 import { policies } from "@/lib/policies";
-import { getPublicProducts } from "@/lib/products";
 
 const routes = ["", "/products", "/about", "/contact", "/faq", "/testimonials", "/blog", "/privacy-policy"];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const productRoutes = getPublicProducts().map((product) => `/products/${product.slug}`);
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const products = await getCatalogProducts();
+  const productRoutes = products.map((product) => `/products/${product.slug}`);
   const policyRoutes = policies
     .filter((policy) => policy.slug !== "privacy-policy")
     .map((policy) => `/policies/${policy.slug}`);

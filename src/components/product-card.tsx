@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ShoppingBasket } from "lucide-react";
 import { Product, formatPrice, getStockLabel } from "@/lib/products";
@@ -11,8 +12,14 @@ export function ProductCard({ product, compact = false }: { product: Product; co
   return (
     <article className={`product-card${compact ? " compact" : ""}`}>
       <div className="product-packshot" style={{ "--pack-colour": product.colour } as React.CSSProperties}>
-        <span>{product.category}</span>
-        <strong>{product.name.split(" ")[0]}</strong>
+        {product.image && product.image !== "/safna-logo.jpg" ? (
+          <Image src={product.image} alt={product.name} width={600} height={600} />
+        ) : (
+          <>
+            <span>{product.category}</span>
+            <strong>{product.name.split(" ")[0]}</strong>
+          </>
+        )}
       </div>
       <div style={{ display: "grid", gap: 8 }}>
         <span className="product-badge">

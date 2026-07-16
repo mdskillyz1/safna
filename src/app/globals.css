@@ -430,6 +430,13 @@ select {
   text-transform: uppercase;
 }
 
+.product-packshot img {
+  width: 100%;
+  height: 230px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 .product-badge {
   width: fit-content;
   border-radius: 999px;
@@ -1944,6 +1951,126 @@ body:has(.admin-login) > footer {
   resize: vertical;
 }
 
+.account-shell {
+  display: grid;
+  gap: 24px;
+}
+
+.account-hero {
+  display: grid;
+  gap: 16px;
+  border: 2px solid #101713;
+  border-radius: 8px;
+  padding: clamp(24px, 5vw, 48px);
+  background: #ffdc3d;
+  box-shadow: 12px 12px 0 rgba(16, 23, 19, 0.14);
+}
+
+.account-hero h1 {
+  max-width: 860px;
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 0.94;
+}
+
+.account-hero p {
+  max-width: 700px;
+  margin: 0;
+  color: #26362d;
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+.account-auth-card,
+.account-card {
+  border: 1px solid rgba(16, 23, 19, 0.12);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 14px 40px rgba(16, 23, 19, 0.07);
+}
+
+.account-auth-card {
+  display: grid;
+  gap: 20px;
+  padding: clamp(18px, 4vw, 28px);
+}
+
+.account-auth-card form {
+  display: grid;
+  gap: 16px;
+}
+
+.account-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  border: 1px solid rgba(16, 23, 19, 0.12);
+  border-radius: 8px;
+  padding: 6px;
+  background: #fffdf7;
+}
+
+.account-tabs button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #101713;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.account-tabs button.active {
+  background: #101713;
+  color: #fff;
+}
+
+.account-form-grid,
+.account-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.account-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.account-card {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 20px;
+}
+
+.account-card h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.account-card p {
+  margin: 0;
+  color: #526158;
+  line-height: 1.6;
+}
+
+.account-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #405045;
+  line-height: 1.5;
+}
+
+.account-check input {
+  margin-top: 4px;
+}
+
+.account-address {
+  grid-template-columns: 0.8fr 1.2fr auto;
+  align-items: end;
+}
+
 .whatsapp {
   position: fixed;
   right: 18px;
@@ -2063,6 +2190,9 @@ body:has(.admin-login) > footer {
   .admin-two-col,
   .admin-editor-grid,
   .admin-form-grid,
+  .account-form-grid,
+  .account-grid,
+  .account-address,
   .detail-grid,
   .pos-grid,
   .admin-order-layout {
