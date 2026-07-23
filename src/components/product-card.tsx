@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ShoppingBasket } from "lucide-react";
@@ -8,12 +9,14 @@ import { useCart } from "./cart-provider";
 
 export function ProductCard({ product, compact = false }: { product: Product; compact?: boolean }) {
   const { addItem } = useCart();
+  const [imageFailed, setImageFailed] = useState(false);
+  const hasImage = Boolean(product.image && product.image !== "/safna-logo.jpg" && !imageFailed);
 
   return (
     <article className={`product-card${compact ? " compact" : ""}`}>
       <div className="product-packshot" style={{ "--pack-colour": product.colour } as React.CSSProperties}>
-        {product.image && product.image !== "/safna-logo.jpg" ? (
-          <Image src={product.image} alt={product.name} width={600} height={600} />
+        {hasImage ? (
+          <Image src={product.image} alt={product.name} width={600} height={600} onError={() => setImageFailed(true)} />
         ) : (
           <>
             <span>{product.category}</span>

@@ -1,12 +1,18 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
+  ArrowRight,
   Bell,
   Check,
+  ClipboardList,
+  CreditCard,
   Eye,
   EyeOff,
+  Gift,
+  Heart,
   Home,
   LockKeyhole,
   LogOut,
@@ -15,11 +21,15 @@ import {
   Package,
   RotateCcw,
   Save,
+  Settings,
   ShieldCheck,
+  ShoppingBag,
   Sparkles,
+  Truck,
   UserRound,
   type LucideIcon,
 } from "lucide-react";
+import { products } from "@/lib/products";
 
 type CustomerAccount = {
   firstName: string;
@@ -38,9 +48,16 @@ const accountFeatures: Array<[LucideIcon, string, string]> = [
   [RotateCcw, "Repeat favourites", "Bring back the sauces, juices and sets you enjoyed before."],
   [Bell, "Product drops", "Choose how Safna shares launch news, offers and recipe ideas."],
 ];
+const accountSections: Array<{ id: "orders" | "delivery" | "preferences"; icon: LucideIcon; label: string }> = [
+  { id: "orders", icon: ClipboardList, label: "Orders" },
+  { id: "delivery", icon: Truck, label: "Delivery" },
+  { id: "preferences", icon: Settings, label: "Preferences" },
+];
+const recommendedProducts = products.filter((product) => product.featured).slice(0, 3);
 
 export function AccountPanel() {
   const [mode, setMode] = useState<"login" | "register">("register");
+  const [activeTab, setActiveTab] = useState<"orders" | "delivery" | "preferences">("orders");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [marketingPreview, setMarketingPreview] = useState(true);
@@ -128,6 +145,17 @@ export function AccountPanel() {
     saveAccount({ ...account, address: String(form.get("address") || "").trim() });
   }
 
+  function updatePreferences(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!account) return;
+    const form = new FormData(event.currentTarget);
+    saveAccount({
+      ...account,
+      marketing: form.get("marketing") === "on",
+      smsUpdates: form.get("smsUpdates") === "on",
+    });
+  }
+
   function signOut() {
     window.localStorage.removeItem(storageKey);
     setAccount(null);
@@ -135,78 +163,147 @@ export function AccountPanel() {
   }
 
   if (account) {
+    const profileCompletion = account.address ? 100 : 72;
+    const initials = `${account.firstName.charAt(0)}${account.lastName.charAt(0)}`.toUpperCase();
+
     return (
       <div className="account-shell">
-        <div className="account-hero account-hero-split">
-          <div>
+        <section className="account-premium-hero">
+          <div className="account-premium-copy">
             <span className="eyebrow">
               <Sparkles size={16} /> Safna customer area
             </span>
             <h1>Welcome back, {account.firstName}.</h1>
-            <p>Manage your Safna details, saved address, product updates and future orders from one place.</p>
-            <button className="button dark" type="button" onClick={signOut}>
-              <LogOut size={18} /> Sign out
-            </button>
+            <p>Your Safna account keeps checkout details, product drops, saved delivery and future orders together.</p>
+            <div className="account-hero-actions">
+              <Link href="/products"><ShoppingBag size={16} /> Shop products</Link>
+              <Link href="/products?category=Sets"><Gift size={16} /> View Safna sets</Link>
+              <button type="button" onClick={signOut}><LogOut size={16} /> Sign out</button>
+            </div>
           </div>
-          <div className="account-status-card">
+
+          <div className="account-member-card">
+            <div className="account-avatar">{initials || "S"}</div>
             <span>Account ready</span>
             <strong>{account.firstName} {account.lastName}</strong>
             <p>{account.email}</p>
             <div className="account-progress">
-              <span style={{ width: account.address ? "100%" : "68%" }} />
+              <span style={{ width: `${profileCompletion}%` }} />
             </div>
-            <small>{account.address ? "Checkout profile complete" : "Add an address to finish setup"}</small>
+            <small>{profileCompletion}% checkout profile complete</small>
           </div>
-        </div>
+        </section>
 
-        <div className="account-grid account-dashboard-grid">
-          <article className="account-card">
-            <UserRound size={22} />
-            <h2>Account details</h2>
-            <p>
-              {account.firstName} {account.lastName}
-              <br />
-              {account.email}
-            </p>
-          </article>
+        <section className="account-hub">
+          <aside className="account-side-menu" aria-label="Account sections">
+            {accountSections.map(({ id, icon: Icon, label }) => (
+              <button
+                className={activeTab === id ? "active" : ""}
+                key={id}
+                type="button"
+                onClick={() => setActiveTab(id)}
+              >
+                <Icon size={18} /> {label}
+              </button>
+            ))}
+          </aside>
 
-          <article className="account-card">
-            <Package size={22} />
-            <h2>Order history</h2>
-            <p>Your Safna orders will appear here after checkout is connected.</p>
-            <span className="account-card-action">No orders yet</span>
-          </article>
+          <div className="account-dashboard-panel">
+            {activeTab === "orders" ? (
+              <div className="account-panel-grid">
+                <article className="account-feature-large">
+                  <Package size={24} />
+                  <span>Order history</span>
+                  <h2>No orders yet.</h2>
+                  <p>When Shopify checkout is connected, paid orders, delivery tracking and receipts will appear here automatically.</p>
+                  <Link className="button yellow" href="/products">
+                    Browse products <ArrowRight size={17} />
+                  </Link>
+                </article>
+                <div className="account-mini-stack">
+                  <article>
+                    <CreditCard size={20} />
+                    <strong>Checkout</strong>
+                    <p>Payment history will sync once live payments are enabled.</p>
+                  </article>
+                  <article>
+                    <RotateCcw size={20} />
+                    <strong>Repeat order</strong>
+                    <p>Favourite sauces and drinks will be reorderable from previous baskets.</p>
+                  </article>
+                </div>
+              </div>
+            ) : null}
 
-          <article className="account-card">
-            <RotateCcw size={22} />
-            <h2>Repeat orders</h2>
-            <p>Quickly reorder favourite sauces, seasonings and sets from previous orders.</p>
-            <Link className="account-card-action" href="/products">Browse products</Link>
-          </article>
+            {activeTab === "delivery" ? (
+              <form className="account-delivery-panel" onSubmit={updateAddress}>
+                <div>
+                  <MapPin size={24} />
+                  <span>Saved delivery</span>
+                  <h2>Prepare your UK delivery address.</h2>
+                  <p>Save an address now so checkout feels quick when Safna opens live ordering.</p>
+                </div>
+                <label className="field">
+                  <span>Delivery address</span>
+                  <textarea name="address" defaultValue={account.address} placeholder="Flat 25, Deanshurst, London EC15PW" />
+                </label>
+                <button className="button yellow" type="submit">
+                  <Save size={18} /> Save delivery address
+                </button>
+                {message ? <p className="account-toast" role="status">{message}</p> : null}
+              </form>
+            ) : null}
 
-          <article className="account-card">
-            <Bell size={22} />
-            <h2>Product updates</h2>
-            <p>{account.marketing ? "Email updates are switched on." : "Email updates are currently off."}</p>
-            <p>{account.smsUpdates ? "SMS updates are switched on." : "SMS updates are currently off."}</p>
-          </article>
-        </div>
+            {activeTab === "preferences" ? (
+              <form className="account-delivery-panel" onSubmit={updatePreferences}>
+                <div>
+                  <Bell size={24} />
+                  <span>Product updates</span>
+                  <h2>Choose what Safna sends you.</h2>
+                  <p>Keep launch news, product drops and useful delivery alerts under your control.</p>
+                </div>
+                <div className="account-preferences account-preferences-large">
+                  <label>
+                    <input name="marketing" type="checkbox" defaultChecked={account.marketing} />
+                    <span>
+                      <strong>Email product drops</strong>
+                      Sauce launches, drink updates, recipes and offers.
+                    </span>
+                  </label>
+                  <label>
+                    <input name="smsUpdates" type="checkbox" defaultChecked={account.smsUpdates} />
+                    <span>
+                      <strong>Delivery text updates</strong>
+                      Order and delivery alerts once checkout is live.
+                    </span>
+                  </label>
+                </div>
+                <button className="button yellow" type="submit">
+                  <Save size={18} /> Save preferences
+                </button>
+                {message ? <p className="account-toast" role="status">{message}</p> : null}
+              </form>
+            ) : null}
+          </div>
+        </section>
 
-        <form className="account-card account-address" onSubmit={updateAddress}>
+        <section className="account-shop-preview">
           <div>
-            <MapPin size={22} />
-            <h2>Saved address</h2>
-            <p>Keep an address ready for faster checkout.</p>
+            <span className="eyebrow">
+              <Heart size={16} /> Recommended next
+            </span>
+            <h2>Start building your Safna list.</h2>
           </div>
-          <label className="field">
-            <span>Address</span>
-            <textarea name="address" defaultValue={account.address} placeholder="House number, street, city, postcode" />
-          </label>
-          <button className="button yellow" type="submit">
-            <Save size={18} /> Save address
-          </button>
-          {message ? <p className="account-toast" role="status">{message}</p> : null}
-        </form>
+          <div className="account-recommendations">
+            {recommendedProducts.map((product) => (
+              <Link href={`/products/${product.slug}`} key={product.id}>
+                <Image src={product.image} alt={product.name} width={240} height={180} />
+                <span>{product.badge}</span>
+                <strong>{product.name}</strong>
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
     );
   }
