@@ -9,7 +9,7 @@ import { useCart } from "./cart-provider";
 import styles from "./header.module.css";
 
 const shopLinks = [
-  { href: "/products?category=Bundles", label: "Safna Sets" },
+  { href: "/products?category=Sets", label: "Safna Sets" },
   { href: "/products", label: "Shop All" },
   { href: "/blog", label: "Recipes" },
 ];

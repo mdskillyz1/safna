@@ -19,11 +19,7 @@ export default async function Home() {
     <>
       <PromoPopup />
       <section className="shop-hero launch-hero">
-        <div className="hero-photo" aria-hidden="true">
-          <div className="plate plate-one" />
-          <div className="plate plate-two" />
-          <div className="spice-pot">Safna</div>
-        </div>
+        <div className="hero-photo" aria-hidden="true" />
         <div className="container hero-content">
           <div className="hero-panel">
             <span className="eyebrow">
@@ -31,16 +27,16 @@ export default async function Home() {
             </span>
             <h1>
               <span>SAUCES.</span>
-              <span>SEASONINGS.</span>
-              <span>FOOD PRODUCTS.</span>
+              <span>JUICES.</span>
+              <span>LASSI.</span>
             </h1>
             <p>
-              Browse Safna&apos;s growing range of flavour-packed food products, kitchen staples, sets and recipe ideas for
-              everyday meals.
+              Discover Safna&apos;s first photographed range of sauces, juices, lassi, yoghurt drinks and launch sets,
+              ready to be announced online.
             </p>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <Link className="button dark" href="/contact">
-                Get product updates <ArrowRight size={18} />
+              <Link className="button dark" href="/products">
+                View products <ArrowRight size={18} />
               </Link>
               <Link className="button secondary" href="/about">
                 Learn about Safna
@@ -86,8 +82,8 @@ export default async function Home() {
             <h2 className="display-title">Clear product information before you buy.</h2>
           </div>
           <p className="lead">
-            Safna product pages are set up for ingredients, allergens, storage advice, shelf life, dietary notes, prices,
-            stock status and delivery information, so customers can shop with confidence.
+            Safna product pages now use the client&apos;s real product photography. Prices, ingredients, allergens,
+            storage advice and shelf-life details will be added from the final labels before live checkout.
           </p>
         </div>
       </section>

@@ -10,6 +10,7 @@ export function ProductPurchase({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
+  const canBuy = product.stock > 0 && product.price > 0 && !product.comingSoon;
 
   function addToBasket() {
     for (let index = 0; index < quantity; index += 1) {
@@ -27,16 +28,23 @@ export function ProductPurchase({ product }: { product: Product }) {
           min="1"
           max={Math.max(product.stock, 1)}
           value={quantity}
+          disabled={!canBuy}
           onChange={(event) => setQuantity(Math.max(1, Number(event.target.value)))}
         />
       </label>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        <button className="button yellow" type="button" onClick={addToBasket} disabled={product.stock <= 0}>
-          <ShoppingBasket size={18} /> Add to basket
+        <button className="button yellow" type="button" onClick={addToBasket} disabled={!canBuy}>
+          <ShoppingBasket size={18} /> {canBuy ? "Add to basket" : "Coming soon"}
         </button>
-        <Link className="button secondary" href="/checkout">
-          View basket
-        </Link>
+        {canBuy ? (
+          <Link className="button secondary" href="/checkout">
+            View basket
+          </Link>
+        ) : (
+          <Link className="button secondary" href="/contact">
+            Ask about this product
+          </Link>
+        )}
       </div>
       {added ? <p role="status">Added to basket.</p> : null}
     </div>

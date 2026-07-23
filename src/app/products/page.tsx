@@ -7,12 +7,19 @@ import { categories } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "Shop Safna Products sauces, seasonings, sets, pantry products and gift ideas online.",
+  description: "Shop Safna Products sauces, juices, lassi, yoghurt drinks, sets and food products online.",
 };
 
-export default async function ProductsPage() {
+type ProductsPageProps = {
+  searchParams: Promise<{ category?: string }>;
+};
+
+export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+  const { category } = await searchParams;
   const products = await getCatalogProducts();
-  const activeCategories = categories.filter((category) => products.some((product) => product.category === category));
+  const selectedCategory = categories.find((item) => item === category);
+  const displayProducts = selectedCategory ? products.filter((product) => product.category === selectedCategory) : products;
+  const activeCategories = categories.filter((item) => displayProducts.some((product) => product.category === item));
 
   if (!products.length) {
     return (
@@ -41,8 +48,8 @@ export default async function ProductsPage() {
       <div className="container">
         <div className="page-title">
           <span className="eyebrow">Shop Safna</span>
-          <h1>Safna products.</h1>
-          <p>Browse sauces, seasonings, sets and pantry products from Safna.</p>
+          <h1>{selectedCategory ? `Safna ${selectedCategory.toLowerCase()}.` : "Safna products."}</h1>
+          <p>Browse sauces, juices, lassi, yoghurt drinks, sets and food products from Safna.</p>
         </div>
 
         <div className="shop-filter-shell" aria-label="Product filters">
@@ -56,13 +63,13 @@ export default async function ProductsPage() {
           <button type="button">Clear filters</button>
         </div>
 
-        <p style={{ color: "#526158", marginTop: 18 }}>{products.length} product{products.length === 1 ? "" : "s"}</p>
+        <p style={{ color: "#526158", marginTop: 18 }}>{displayProducts.length} product{displayProducts.length === 1 ? "" : "s"}</p>
 
         {activeCategories.map((category) => (
           <div key={category} style={{ marginTop: 44 }}>
             <h2 style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)", marginBottom: 18 }}>{category}</h2>
             <div className="grid-3 product-grid">
-              {products
+              {displayProducts
                 .filter((product) => product.category === category)
                 .map((product) => (
                   <ProductCard key={product.id} product={product} />

@@ -32,7 +32,14 @@ export async function POST(request: Request) {
 
   const validLines = (body.lines || [])
     .map((line) => ({ line, product: getPublicProductById(line.id) }))
-    .filter((item) => item.product && item.line.quantity > 0);
+    .filter(
+      (item) =>
+        item.product &&
+        item.line.quantity > 0 &&
+        item.product.price > 0 &&
+        item.product.stock > 0 &&
+        !item.product.comingSoon,
+    );
 
   if (!validLines.length) {
     return NextResponse.json(

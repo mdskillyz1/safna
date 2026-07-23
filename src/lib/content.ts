@@ -8,7 +8,7 @@ export const site = {
 };
 
 export const navItems = [
-  { href: "/products?category=Bundles", label: "Safna Sets" },
+  { href: "/products?category=Sets", label: "Safna Sets" },
   { href: "/products", label: "Shop All" },
   { href: "/blog", label: "Recipes" },
   { href: "/about", label: "Our Story" },
@@ -21,14 +21,14 @@ export type PublishStatus = "Draft" | "Published";
 export const storefrontTiles = [
   {
     label: "Safna Sets",
-    href: "/products?category=Bundles",
-    description: "Bundles, gift boxes and multi-product collections.",
+    href: "/products?category=Sets",
+    description: "Launch lineups, gift ideas and multi-product collections.",
     status: "Published" as PublishStatus,
   },
   {
     label: "Shop All",
     href: "/products",
-    description: "Browse sauces, seasonings, pantry products and more.",
+    description: "Browse sauces, drinks, sets and more.",
     status: "Published" as PublishStatus,
   },
   {

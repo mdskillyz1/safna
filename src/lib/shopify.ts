@@ -132,7 +132,8 @@ function getCategory(product: ShopifyProductNode): Product["category"] {
   const normalized = label.toLowerCase();
 
   if (normalized.includes("season")) return "Seasonings";
-  if (normalized.includes("bundle") || normalized.includes("set") || normalized.includes("gift")) return "Bundles";
+  if (normalized.includes("bundle") || normalized.includes("set") || normalized.includes("gift")) return "Sets";
+  if (normalized.includes("drink") || normalized.includes("juice") || normalized.includes("lassi") || normalized.includes("smoothie")) return "Drinks";
   if (normalized.includes("pantry")) return "Pantry";
   return "Sauces";
 }
@@ -156,7 +157,7 @@ function mapShopifyProduct(product: ShopifyProductNode): Product {
     description: product.description || `Shop ${product.title} from Safna Products.`,
     longDescription: product.description || `Shop ${product.title} from Safna Products.`,
     badge: getMetafieldValue(product.badge, category),
-    colour: category === "Seasonings" ? "#2f318b" : category === "Bundles" ? "#ffdc3d" : "#ef3f35",
+    colour: category === "Seasonings" ? "#2f318b" : category === "Sets" ? "#ffdc3d" : category === "Drinks" ? "#f2a51a" : "#ef3f35",
     size: getMetafieldValue(product.size, variant?.selectedOptions.find((option) => /size|weight/i.test(option.name))?.value || "See label"),
     stock,
     heatLevel: getMetafieldValue(product.heatLevel, tags.includes("hot") ? "Hot" : tags.includes("mild") ? "Mild" : "No heat") as Product["heatLevel"],
@@ -169,7 +170,7 @@ function mapShopifyProduct(product: ShopifyProductNode): Product {
     image,
     status: "Published",
     visibility: "Public",
-    isBundle: category === "Bundles",
+    isBundle: category === "Sets",
     featured: tags.includes("featured") || tags.includes("best-seller"),
     shopifyProductId: product.id,
     shopifyVariantId: variant?.id,

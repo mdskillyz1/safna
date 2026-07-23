@@ -75,7 +75,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <h1>{product.name}</h1>
             <p>{product.longDescription}</p>
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", margin: "18px 0" }}>
-              {[product.size, product.heatLevel, getStockLabel(product.stock)].map((item) => (
+              {[product.size, product.heatLevel, product.comingSoon ? "Coming soon" : getStockLabel(product.stock)].map((item) => (
                 <span className="eyebrow" key={item}>
                   {item}
                 </span>
@@ -87,7 +87,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   {formatPrice(product.price)}
                 </span>
               ) : null}
-              <strong style={{ fontSize: "2rem" }}>{formatPrice(product.salePrice || product.price)}</strong>
+              <strong style={{ fontSize: "2rem" }}>
+                {product.price > 0 ? formatPrice(product.salePrice || product.price) : "Price announced soon"}
+              </strong>
             </div>
             <ProductPurchase product={product} />
           </div>

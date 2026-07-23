@@ -151,86 +151,10 @@ select {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(16, 23, 19, 0.08), rgba(16, 23, 19, 0.04)),
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.45) 0 42px, rgba(255, 220, 61, 0.55) 42px 84px);
-}
-
-.plate,
-.bottle,
-.spice-pot {
-  position: absolute;
-  box-shadow: 0 18px 45px rgba(16, 23, 19, 0.22);
-}
-
-.plate {
-  border: 18px solid #fff;
-  border-radius: 999px;
-  background: radial-gradient(circle, #a7f3c2 0 28%, #1f8d4d 29% 35%, #fff 36% 100%);
-}
-
-.plate-one {
-  right: -90px;
-  top: 72px;
-  width: 360px;
-  height: 360px;
-}
-
-.plate-two {
-  left: -120px;
-  bottom: -120px;
-  width: 330px;
-  height: 330px;
-  background: radial-gradient(circle, #ef3f35 0 26%, #ffdc3d 27% 35%, #fff 36% 100%);
-}
-
-.bottle {
-  display: grid;
-  place-items: center;
-  width: 110px;
-  height: 300px;
-  border: 8px solid #101713;
-  border-radius: 28px 28px 18px 18px;
-  color: #fff;
-  font-weight: 1000;
-  text-transform: uppercase;
-  transform: rotate(-16deg);
-}
-
-.bottle::before {
-  content: "";
-  position: absolute;
-  top: -48px;
-  width: 52px;
-  height: 56px;
-  border-radius: 12px 12px 4px 4px;
-  background: #101713;
-}
-
-.bottle-red {
-  right: 330px;
-  top: 86px;
-  background: #ef3f35;
-}
-
-.bottle-green {
-  right: 520px;
-  bottom: 72px;
-  background: #1f8d4d;
-  transform: rotate(14deg);
-}
-
-.spice-pot {
-  right: 170px;
-  bottom: 62px;
-  display: grid;
-  place-items: center;
-  width: 170px;
-  height: 170px;
-  border: 8px solid #101713;
-  border-radius: 24px;
-  background: #ffdc3d;
-  font-weight: 1000;
-  transform: rotate(8deg);
+    linear-gradient(90deg, rgba(16, 23, 19, 0.72) 0%, rgba(16, 23, 19, 0.24) 46%, rgba(255, 220, 61, 0.08) 100%),
+    url("/brand/safna-product-lineup-table.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
 .hero-content {
@@ -434,7 +358,8 @@ select {
   width: 100%;
   height: 230px;
   border-radius: 8px;
-  object-fit: cover;
+  background: #f8f7f2;
+  object-fit: contain;
 }
 
 .product-badge {
